@@ -1,7 +1,9 @@
 import styled, {css} from "styled-components";
 import {ButtonProps, IconButtonProps} from ".";
 
-export const ButtonBox = styled.button<ButtonProps & {styleType: ButtonProps["type"]}>`
+export const ButtonBox = styled.button<
+  ButtonProps & {$styleType: ButtonProps["type"]; $block?: ButtonProps["block"]}
+>`
   border-radius: 4px;
   font-weight: 400;
   font-size: 12px;
@@ -13,8 +15,8 @@ export const ButtonBox = styled.button<ButtonProps & {styleType: ButtonProps["ty
   gap: 8px;
   display: inline-flex;
   white-space: nowrap;
-  ${({styleType, theme}) => {
-    switch (styleType) {
+  ${({$styleType, theme}) => {
+    switch ($styleType) {
       default:
       case "primary":
         return css`
@@ -83,29 +85,29 @@ export const ButtonBox = styled.button<ButtonProps & {styleType: ButtonProps["ty
       default:
       case "sm":
         return css`
-          padding: 8px 16px;
+          padding: 6px 16px;
           font-size: 12px;
           svg {
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
           }
         `;
       case "md":
         return css`
-          padding: 10px 16px;
+          padding: 8px 16px;
           font-size: 14px;
           svg {
-            width: 18px;
-            height: 18px;
+            width: 14px;
+            height: 14px;
           }
         `;
       case "lg":
         return css`
-          padding: 12px 16px;
+          padding: 10px 16px;
           font-size: 16px;
           svg {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
           }
         `;
     }
@@ -128,7 +130,7 @@ export const ButtonBox = styled.button<ButtonProps & {styleType: ButtonProps["ty
     `}
 `;
 
-export const IconButtonBox = styled(ButtonBox)<IconButtonProps>`
+export const IconButtonBox = styled(ButtonBox)`
   ${({size}) => {
     switch (size) {
       default:
@@ -136,24 +138,24 @@ export const IconButtonBox = styled(ButtonBox)<IconButtonProps>`
         return css`
           padding: 8px;
           svg {
-            width: 18px;
-            height: 18px;
+            width: 14px;
+            height: 14px;
           }
         `;
       case "md":
         return css`
-          padding: 10px;
+          padding: 10.5px;
           svg {
-            width: 21px;
-            height: 21px;
+            width: 16px;
+            height: 16px;
           }
         `;
       case "lg":
         return css`
-          padding: 12px;
+          padding: 13px;
           svg {
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
           }
         `;
     }

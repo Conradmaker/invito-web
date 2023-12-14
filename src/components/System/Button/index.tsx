@@ -26,7 +26,7 @@ function Button({
   rightIcon,
 }: ButtonProps) {
   return (
-    <ButtonBox styleType={type} block={block} size={size} disabled={disabled}>
+    <ButtonBox $styleType={type} $block={block} size={size} disabled={disabled}>
       {loading ? <Loading color="alternate" size={16} /> : leftIcon ? leftIcon : <></>}
       {children}
       {rightIcon ? rightIcon : <></>}
@@ -43,7 +43,7 @@ function IconButton({
   disabled = false,
 }: IconButtonProps) {
   return (
-    <IconButtonBox styleType={type} block={block} size={size} disabled={disabled}>
+    <IconButtonBox $styleType={type} $block={block} size={size} disabled={disabled}>
       {loading ? <Loading color="alternate" size={16} /> : <RxLayers />}
     </IconButtonBox>
   );

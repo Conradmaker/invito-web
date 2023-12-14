@@ -1,7 +1,12 @@
 import styled, {css} from "styled-components";
 import {BodyProps, HeadingProps, TypoProps} from ".";
 
-const TypoSt = styled.span<TypoProps>`
+const TypoSt = styled.span<{
+  color?: TypoProps["color"];
+  $mt?: TypoProps["mt"];
+  $mb?: TypoProps["mb"];
+  $align?: TypoProps["align"];
+}>`
   ${({theme, color}) => {
     switch (color) {
       default:
@@ -21,18 +26,22 @@ const TypoSt = styled.span<TypoProps>`
         return css`
           color: ${theme.colors.primary[300]};
         `;
+      case "danger":
+        return css`
+          color: ${theme.colors.danger[300]};
+        `;
     }
   }}
-  ${({align}) => css`
-    text-align: ${align};
+  ${({$align}) => css`
+    text-align: ${$align};
   `}
-  margin-top: ${({mt}) => mt}px;
-  margin-bottom: ${({mb}) => mb}px;
+  margin-top: ${({$mt}) => $mt}px;
+  margin-bottom: ${({$mb}) => $mb}px;
 `;
-export const HeadingTypo = styled(TypoSt)<HeadingProps>`
+export const HeadingTypo = styled(TypoSt)<{$level: HeadingProps["level"]}>`
   font-weight: 700;
-  ${({level}) => {
-    switch (level) {
+  ${({$level}) => {
+    switch ($level) {
       case 1:
         return css`
           font-size: 38px;
@@ -61,12 +70,14 @@ export const HeadingTypo = styled(TypoSt)<HeadingProps>`
     }
   }}
 `;
-export const BodyTypo = styled(TypoSt)<BodyProps>`
+export const BodyTypo = styled(TypoSt)<{
+  $weight?: BodyProps["weight"];
+}>`
   font-size: 14px;
   line-height: 22px;
   /* font-feature-settings: "ss03"; */
-  ${({weight}) => {
-    switch (weight) {
+  ${({$weight}) => {
+    switch ($weight) {
       case "regular":
         return css`
           font-weight: 400;

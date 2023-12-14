@@ -26,6 +26,13 @@ const colors = {
     200: "#DCDCE4",
     100: "#F6F6F9",
   },
+  danger: {
+    500: "#B72B1A",
+    400: "#D02B20",
+    300: "#EE5E52",
+    200: "#F5C0B8",
+    100: "#FCECEA",
+  },
 };
 export const theme = {
   colors,
