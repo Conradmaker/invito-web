@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 // import {Inter,Gothic_A1} from "next/font/google";
 import "./globals.css";
-import StyledComponentsRegistry from "@/libs/registry/styledComponentsRegistry";
+import StyledProvider from "@/libs/registry/styledComponentsRegistry";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,8 +11,20 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link
+          rel="preload"
+          as="style"
+          href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css"
+        />
+      </head>
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledProvider>{children}</StyledProvider>
       </body>
     </html>
   );

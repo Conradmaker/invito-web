@@ -1,113 +1,155 @@
-import Image from 'next/image'
+"use client";
+import Button from "@/components/System/Button";
+import Typo from "@/components/System/Typo";
+import {RxComponent1, RxLayers} from "react-icons/rx";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="flex min-h-screen flex-col p-24">
+      <Typo.Heading level={2} mb={44}>
+        타이포 그라피
+      </Typo.Heading>
+      <div className="flex justify-between w-10/12">
+        <div className="flex flex-col gap-4">
+          <Typo.Heading level={3} mb={12}>
+            Heading 헤딩
+          </Typo.Heading>
+          <Typo.Heading level={1}>Heading1. 타이포그라피</Typo.Heading>
+          <Typo.Heading level={2}>Heading2 타이포그라피</Typo.Heading>
+          <Typo.Heading level={3}>Heading3 타이포그라피</Typo.Heading>
+          <Typo.Heading level={4}>Heading4 타이포그라피</Typo.Heading>
+          <Typo.Heading level={5}>Heading5 타이포그라피</Typo.Heading>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Typo.Heading level={3} mb={4}>
+            Body 바디
+          </Typo.Heading>
+          <Typo.Heading level={4}>Body Weight 폰트 굵기</Typo.Heading>
+          <Typo.Body>Regular 레귤러 바디 (Base Font)</Typo.Body>
+          <Typo.Body weight="medium">Medium 미디엄 바디</Typo.Body>
+          <Typo.Body weight="strong">Strong 스트롱 바디</Typo.Body>
+          <Typo.Heading level={4} mt={8}>
+            Body Color 폰트 색상
+          </Typo.Heading>
+          <Typo.Body>Primary 타이포그라피</Typo.Body>
+          <Typo.Body color="secondary">Secondary 타이포그라피</Typo.Body>
+          <Typo.Body color="highlight">Highlight 타이포그라피</Typo.Body>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Typo.Heading level={3} mb={4}>
+            Description 설명
+          </Typo.Heading>
+          <Typo.Desc>Description 타이포그라피</Typo.Desc>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <Typo.Heading mt={60} level={2} mb={44}>
+        버튼
+      </Typo.Heading>
+      <div className="flex w-10/12 gap-24">
+        <div className="flex flex-col gap-5 items-start">
+          <Typo.Heading level={3} mb={4}>
+            Small
+          </Typo.Heading>
+          <Button type="primary">Primary 버튼</Button>
+          <Button type="secondary">Secondary 버튼</Button>
+          <Button type="tertiary">Tertiary 버튼</Button>
+          <Button type="ghost">Ghost 버튼</Button>
+        </div>
+        <div className="flex flex-col gap-5 items-start">
+          <Typo.Heading level={3} mb={4}>
+            Medium
+          </Typo.Heading>
+          <Button type="primary" size="md">
+            Primary 버튼
+          </Button>
+          <Button type="secondary" size="md">
+            Secondary 버튼
+          </Button>
+          <Button type="tertiary" size="md">
+            Tertiary 버튼
+          </Button>
+          <Button type="ghost" size="md">
+            Ghost 버튼
+          </Button>
+        </div>
+        <div className="flex flex-col gap-5 items-start">
+          <Typo.Heading level={3} mb={4}>
+            Large
+          </Typo.Heading>
+          <Button type="primary" size="lg">
+            Primary 버튼
+          </Button>
+          <Button type="secondary" size="lg">
+            Secondary 버튼
+          </Button>
+          <Button type="tertiary" size="lg">
+            Tertiary 버튼
+          </Button>
+          <Button type="ghost" size="lg">
+            Ghost 버튼
+          </Button>
+        </div>
+        <div className="flex flex-col gap-5 items-start">
+          <Typo.Heading level={3} mb={4}>
+            Loading
+          </Typo.Heading>
+          <Button type="primary" loading>
+            버튼
+          </Button>
+          <Button type="secondary" loading>
+            버튼
+          </Button>
+          <Button type="tertiary" loading>
+            버튼
+          </Button>
+          <Button type="ghost" loading>
+            버튼
+          </Button>
+        </div>
+        <div className="flex flex-col gap-5 items-start">
+          <Typo.Heading level={3} mb={4}>
+            Disabled
+          </Typo.Heading>
+          <Button type="primary" disabled>
+            버튼
+          </Button>
+          <Button type="secondary" disabled>
+            버튼
+          </Button>
+          <Button type="tertiary" disabled>
+            버튼
+          </Button>
+          <Button type="ghost" disabled>
+            버튼
+          </Button>
+        </div>
+        <div className="flex flex-col gap-5 items-start">
+          <Typo.Heading level={3} mb={4}>
+            Only&nbsp;Icon
+          </Typo.Heading>
+          <Button.Icon type="primary" />
+          <Button.Icon type="secondary" size="md" loading />
+          <Button.Icon type="tertiary" size="lg" />
+          <Button.Icon type="ghost" size="lg" />
+        </div>
+        <div className="flex flex-col gap-5 items-start">
+          <Typo.Heading level={3} mb={4}>
+            With&nbsp;Icon
+          </Typo.Heading>
+          <Button type="primary" leftIcon={<RxComponent1 />} rightIcon={<RxLayers />}>
+            버튼
+          </Button>
+          <Button type="secondary" leftIcon={<RxComponent1 />}>
+            버튼
+          </Button>
+          <Button type="tertiary" leftIcon={<RxComponent1 />}>
+            버튼
+          </Button>
+          <Button type="ghost" leftIcon={<RxComponent1 />}>
+            버튼
+          </Button>
+        </div>
       </div>
     </main>
-  )
+  );
 }

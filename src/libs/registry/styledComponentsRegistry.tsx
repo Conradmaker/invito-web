@@ -5,11 +5,7 @@ import {useServerInsertedHTML} from "next/navigation";
 import {ServerStyleSheet, StyleSheetManager, ThemeProvider} from "styled-components";
 import {theme} from "../theme";
 
-export default function StyledComponentsRegistry({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function StyledComponentsRegistry({children}: {children: React.ReactNode}) {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
@@ -26,5 +22,15 @@ export default function StyledComponentsRegistry({
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </StyleSheetManager>
+  );
+}
+
+export default function StyledProvider({children}: {children: React.ReactNode}) {
+  return (
+    <StyledComponentsRegistry>
+      <ThemeProvider theme={theme}>
+        <>{children}</>
+      </ThemeProvider>
+    </StyledComponentsRegistry>
   );
 }
