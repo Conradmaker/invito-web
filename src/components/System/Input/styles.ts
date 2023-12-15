@@ -3,8 +3,12 @@ import {InputProps} from ".";
 import * as RSlider from "@radix-ui/react-slider";
 import * as RSelect from "@radix-ui/react-select";
 import * as RSwitch from "@radix-ui/react-switch";
+import * as RToggle from "@radix-ui/react-toggle";
+import * as RToggleGroup from "@radix-ui/react-toggle-group";
 import {SwitchProps} from "./Switch";
 import {SliderProps} from "./Slider";
+import {LabelProps} from "./Label";
+import {ToggleProps} from "./Toggle";
 
 export const InputBox = styled.div<InputProps & {$focused: boolean; $error: boolean}>`
   transition: all 0.1s ease-in-out;
@@ -267,11 +271,12 @@ export const SliderBox = styled(RSlider.Root)<SliderProps>`
   }}
 `;
 
-export const RSelectSt = styled.div<{
+type RSelectProps = {
   $focused: boolean;
   $error: boolean;
   size: "sm" | "md" | "lg";
-}>`
+};
+export const RSelectSt = styled.div<RSelectProps>`
   display: flex;
   .select-trigger {
     flex: 1;
@@ -373,8 +378,8 @@ export const RSelectSt = styled.div<{
 export const SelectContentSt = styled(RSelect.Content)`
   overflow: hidden;
   border-radius: 6px;
-  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
-    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  box-shadow: 0px 10px 32px -10px rgba(22, 23, 24, 0.3),
+    0px 10px 16px -15px rgba(22, 23, 24, 0.15);
   background-color: #fff;
   .select-viewport {
     padding: 5px;
@@ -428,4 +433,182 @@ export const SelectContentSt = styled(RSelect.Content)`
       margin: 5px;
     }
   }
+`;
+
+type ToggleStyleProps = {
+  size: ToggleProps["size"];
+};
+export const ToggleBox = styled(RToggle.Root)<ToggleStyleProps>`
+  background-color: ${({theme}) => theme.colors.neutral[0]};
+  color: ${({theme}) => theme.colors.neutral[600]};
+  border-radius: 4px;
+  display: flex;
+  font-size: 18px;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0px 1px ${({theme}) => theme.colors.neutral[500]} inset;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: ${({theme}) => theme.colors.neutral[100]};
+  }
+  &[data-state="on"] {
+    background-color: ${({theme}) => theme.colors.primary[300]};
+    color: ${({theme}) => theme.colors.neutral[0]};
+    &:hover {
+      background-color: ${({theme}) => theme.colors.primary[400]};
+    }
+  }
+  &:focus {
+    box-shadow: 0 0 0 2px ${({theme}) => theme.colors.primary[200]};
+  }
+  ${({size}) => {
+    switch (size) {
+      default:
+      case "sm":
+        return css`
+          padding: 6px;
+          /* padding: 0 12px; */
+          font-size: 12px;
+          svg {
+            width: 18px;
+            height: 18px;
+          }
+          .toggle-text {
+            margin-left: 2px;
+            margin-right: 4px;
+          }
+        `;
+      case "md":
+        return css`
+          padding: 8.5px;
+          font-size: 14px;
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+          .toggle-text {
+            margin-left: 2px;
+            margin-right: 5px;
+          }
+        `;
+      case "lg":
+        return css`
+          padding: 10px;
+          font-size: 16px;
+          svg {
+            width: 24px;
+            height: 24px;
+          }
+          .toggle-text {
+            margin-left: 2px;
+            margin-right: 6px;
+          }
+        `;
+    }
+  }}
+`;
+
+export const ToggleGroupBox = styled(RToggleGroup.Root)<ToggleStyleProps>`
+  display: inline-flex;
+  background-color: ${({theme}) => theme.colors.neutral[200]};
+  border-radius: 4px;
+  box-shadow: 0 0px 1px ${({theme}) => theme.colors.neutral[500]};
+  .toggle-group-item {
+    background-color: ${({theme}) => theme.colors.neutral[0]};
+    color: ${({theme}) => theme.colors.neutral[600]};
+    display: flex;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1px;
+    transition: all 0.2s ease-in-out;
+    &:first-child {
+      margin-left: 0;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    &:last-child {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+    &:hover {
+      background-color: ${({theme}) => theme.colors.neutral[100]};
+    }
+    &[data-state="on"] {
+      background-color: ${({theme}) => theme.colors.primary[300]};
+      color: ${({theme}) => theme.colors.neutral[0]};
+      &:hover {
+        background-color: ${({theme}) => theme.colors.primary[400]};
+      }
+    }
+    &:focus {
+      position: relative;
+      box-shadow: 0 0 0 2px ${({theme}) => theme.colors.primary[200]};
+    }
+    ${({size}) => {
+      switch (size) {
+        default:
+        case "sm":
+          return css`
+            padding: 7px;
+            font-size: 12px;
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+            .toggle-text {
+              margin-left: 6px;
+              margin-right: 4px;
+            }
+          `;
+        case "md":
+          return css`
+            padding: 9.5px;
+            font-size: 14px;
+            svg {
+              width: 18px;
+              height: 18px;
+            }
+            .toggle-text {
+              margin-left: 2px;
+              margin-right: 5px;
+            }
+          `;
+        case "lg":
+          return css`
+            padding: 11px;
+            font-size: 16px;
+            svg {
+              width: 22px;
+              height: 22px;
+            }
+            .toggle-text {
+              margin-left: 2px;
+              margin-right: 6px;
+            }
+          `;
+      }
+    }}
+  }
+`;
+
+export const LabelBox = styled.label<{$direction: LabelProps["direction"]}>`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+  ${({$direction}) =>
+    $direction === "horizontal" &&
+    css`
+      flex-direction: row;
+      align-items: center;
+      & > div {
+        display: flex;
+        flex-direction: column;
+      }
+    `}
 `;

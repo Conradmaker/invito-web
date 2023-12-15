@@ -39,11 +39,12 @@ const TypoSt = styled.span<{
   margin-bottom: ${({$mb}) => $mb}px;
 `;
 export const HeadingTypo = styled(TypoSt)<{$level: HeadingProps["level"]}>`
-  font-weight: 700;
+  font-weight: 600;
   ${({$level}) => {
     switch ($level) {
       case 1:
         return css`
+          font-weight: 700;
           font-size: 38px;
           line-height: 46px;
         `;

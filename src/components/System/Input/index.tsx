@@ -4,6 +4,8 @@ import Typo from "../Typo";
 import Switch from "./Switch";
 import Slider from "./Slider";
 import Select from "./Select";
+import Toggle from "./Toggle";
+import Label from "./Label";
 
 export type InputProps = {
   size?: "sm" | "md" | "lg";
@@ -46,4 +48,6 @@ function Input({
 Input.Switch = Switch;
 Input.Slider = Slider;
 Input.Select = Select;
+Input.Label = Label;
+Input.Toggle = Toggle;
 export default Input;

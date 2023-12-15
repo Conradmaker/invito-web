@@ -14,6 +14,7 @@ export type ButtonProps = {
   disabled?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  className?: string;
 };
 function Button({
   children,
@@ -24,9 +25,16 @@ function Button({
   disabled = false,
   leftIcon,
   rightIcon,
+  className,
 }: ButtonProps) {
   return (
-    <ButtonBox $styleType={type} $block={block} size={size} disabled={disabled}>
+    <ButtonBox
+      className={className}
+      $styleType={type}
+      $block={block}
+      size={size}
+      disabled={disabled}
+    >
       {loading ? <Loading color="alternate" size={16} /> : leftIcon ? leftIcon : <></>}
       {children}
       {rightIcon ? rightIcon : <></>}
@@ -34,17 +42,25 @@ function Button({
   );
 }
 
-export type IconButtonProps = Omit<ButtonProps, "children" | "rightIcon" | "leftIcon">;
+export type IconButtonProps = Omit<ButtonProps, "rightIcon" | "leftIcon">;
 function IconButton({
   type = "primary",
   size = "sm",
   loading = false,
   block = false,
   disabled = false,
+  className,
+  children,
 }: IconButtonProps) {
   return (
-    <IconButtonBox $styleType={type} $block={block} size={size} disabled={disabled}>
-      {loading ? <Loading color="alternate" size={16} /> : <RxLayers />}
+    <IconButtonBox
+      className={className}
+      $styleType={type}
+      $block={block}
+      size={size}
+      disabled={disabled}
+    >
+      {loading ? <Loading color="alternate" size={16} /> : children}
     </IconButtonBox>
   );
 }

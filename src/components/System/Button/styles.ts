@@ -1,9 +1,11 @@
 import styled, {css} from "styled-components";
 import {ButtonProps, IconButtonProps} from ".";
 
-export const ButtonBox = styled.button<
-  ButtonProps & {$styleType: ButtonProps["type"]; $block?: ButtonProps["block"]}
->`
+type StyledBtnProps = ButtonProps & {
+  $styleType: ButtonProps["type"];
+  $block?: ButtonProps["block"];
+};
+export const ButtonBox = styled.button<StyledBtnProps>`
   border-radius: 4px;
   font-weight: 400;
   font-size: 12px;
@@ -50,8 +52,8 @@ export const ButtonBox = styled.button<
       case "tertiary":
         return css`
           background-color: ${theme.colors.neutral[0]};
-          color: ${theme.colors.neutral[900]};
           box-shadow: 0 0 0 1px ${theme.colors.neutral[200]} inset;
+          color: ${theme.colors.neutral[900]};
           svg {
             stroke: ${theme.colors.neutral[900]};
           }
@@ -128,9 +130,41 @@ export const ButtonBox = styled.button<
         color: ${theme.colors.neutral[300]};
       }
     `}
+    ${({$block}) =>
+    $block &&
+    css`
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+    `}
 `;
 
 export const IconButtonBox = styled(ButtonBox)`
+  ${({$styleType, theme}) => {
+    switch ($styleType) {
+      default:
+      case "primary":
+        return css`
+          color: ${theme.colors.neutral[100]};
+        `;
+      case "secondary":
+        return css`
+          color: ${theme.colors.primary[400]};
+          &:active {
+            color: ${theme.colors.primary[400]};
+          }
+        `;
+      case "tertiary":
+        return css`
+          color: ${theme.colors.neutral[600]};
+        `;
+      case "ghost":
+        return css`
+          color: ${theme.colors.neutral[700]};
+        `;
+    }
+  }}
   ${({size}) => {
     switch (size) {
       default:
