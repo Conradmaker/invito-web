@@ -7,6 +7,7 @@ export type TypoProps = {
   mt?: number;
   mb?: number;
   align?: "left" | "center" | "right";
+  className?: string;
 };
 function Typo() {
   return <></>;
@@ -19,9 +20,17 @@ function Heading({
   align = "left",
   mt = 0,
   mb = 0,
+  className,
 }: HeadingProps) {
   return (
-    <HeadingTypo color={color} $level={level} $align={align} $mt={mt} $mb={mb}>
+    <HeadingTypo
+      className={className}
+      color={color}
+      $level={level}
+      $align={align}
+      $mt={mt}
+      $mb={mb}
+    >
       {children}
     </HeadingTypo>
   );
@@ -34,17 +43,32 @@ function Body({
   align = "left",
   mt = 0,
   mb = 0,
+  className,
 }: BodyProps) {
   return (
-    <BodyTypo color={color} $weight={weight} $align={align} $mt={mt} $mb={mb}>
+    <BodyTypo
+      className={className}
+      color={color}
+      $weight={weight}
+      $align={align}
+      $mt={mt}
+      $mb={mb}
+    >
       {children}
     </BodyTypo>
   );
 }
 type DescProps = {} & TypoProps;
-function Desc({color = "primary", children, align = "left", mt = 0, mb = 0}: DescProps) {
+function Desc({
+  className,
+  color = "primary",
+  children,
+  align = "left",
+  mt = 0,
+  mb = 0,
+}: DescProps) {
   return (
-    <DescTypo color={color} $align={align} $mt={mt} $mb={mb}>
+    <DescTypo className={className} color={color} $align={align} $mt={mt} $mb={mb}>
       {children}
     </DescTypo>
   );
