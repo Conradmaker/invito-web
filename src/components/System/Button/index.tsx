@@ -9,7 +9,7 @@ export type ButtonProps = {
   children: React.ReactNode;
   loading?: boolean;
   type?: "primary" | "secondary" | "tertiary" | "ghost";
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   block?: boolean;
   disabled?: boolean;
   leftIcon?: React.ReactNode;

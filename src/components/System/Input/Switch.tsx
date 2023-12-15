@@ -3,7 +3,7 @@ import * as RSwitch from "@radix-ui/react-switch";
 import {SwitchBox} from "./styles";
 
 export type SwitchProps = {
-  size: "sm" | "md" | "lg";
+  size: "xs" | "sm" | "md" | "lg";
 };
 export default function Switch({size = "sm"}: SwitchProps) {
   return (

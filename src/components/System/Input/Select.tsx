@@ -5,7 +5,7 @@ import {RxArrowDown, RxArrowUp, RxCaretDown, RxCheck, RxDotFilled} from "react-i
 import {RSelectSt, SelectContentSt} from "./styles";
 
 export type SelectProps = {
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xs";
   disabled?: boolean;
   placeholder?: string;
   error?: string;

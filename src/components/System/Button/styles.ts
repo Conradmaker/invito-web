@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components";
-import {ButtonProps, IconButtonProps} from ".";
+import {ButtonProps} from ".";
 
 type StyledBtnProps = ButtonProps & {
   $styleType: ButtonProps["type"];
@@ -84,6 +84,16 @@ export const ButtonBox = styled.button<StyledBtnProps>`
 
   ${({size}) => {
     switch (size) {
+      case "xs":
+        return css`
+          padding: 6.5px 10px;
+          font-size: 10.5px;
+          line-height: 1;
+          svg {
+            width: 10.5px;
+            height: 10.5px;
+          }
+        `;
       default:
       case "sm":
         return css`
@@ -167,6 +177,14 @@ export const IconButtonBox = styled(ButtonBox)`
   }}
   ${({size}) => {
     switch (size) {
+      case "xs":
+        return css`
+          padding: 5.5px;
+          svg {
+            width: 12.5px;
+            height: 12.5px;
+          }
+        `;
       default:
       case "sm":
         return css`

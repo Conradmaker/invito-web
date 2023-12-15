@@ -2,7 +2,7 @@ import React from "react";
 import * as RToggleGroup from "@radix-ui/react-toggle-group";
 import {ToggleBox, ToggleGroupBox} from "./styles";
 export type ToggleGroupProps = {
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   data?: {
     value: string;
     icon: React.ReactNode;
@@ -34,7 +34,7 @@ function ToggleGroup({size = "sm", data}: ToggleGroupProps) {
   );
 }
 export type ToggleProps = {
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   value: string;
   icon: React.ReactNode;
   text?: string;

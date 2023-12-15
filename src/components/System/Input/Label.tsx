@@ -7,24 +7,41 @@ export type LabelProps = {
   direction?: "vertical" | "horizontal";
   title: string;
   desc?: string;
+  size?: "sm" | "lg";
 };
 export default function Label({
   children,
   direction = "vertical",
   title,
   desc,
+  size = "lg",
 }: LabelProps) {
   return (
     <LabelBox $direction={direction}>
       {direction === "vertical" ? (
         <div>
-          <Typo.Body weight="medium" className="label-head">
-            {title}
-          </Typo.Body>
-          <Typo.Desc className="label-sub">{desc}</Typo.Desc>
+          {size === "sm" ? (
+            <>
+              <Typo.Body whiteSpace="nowrap" weight="medium" className="label-head">
+                {title}
+              </Typo.Body>
+              <Typo.Desc className="label-sub">{desc}</Typo.Desc>
+            </>
+          ) : (
+            <>
+              <Typo.Desc whiteSpace="nowrap" color="primary" className="label-head">
+                {title}
+              </Typo.Desc>
+              <Typo.Desc className="label-sub">{desc}</Typo.Desc>
+            </>
+          )}
         </div>
+      ) : size === "sm" ? (
+        <Typo.Desc whiteSpace="nowrap" color="primary" className="label-head">
+          {title} :
+        </Typo.Desc>
       ) : (
-        <Typo.Body weight="regular" className="label-head">
+        <Typo.Body whiteSpace="nowrap" weight="regular" className="label-head">
           {title} :
         </Typo.Body>
       )}

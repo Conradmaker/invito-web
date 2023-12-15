@@ -8,6 +8,7 @@ export type TypoProps = {
   mb?: number;
   align?: "left" | "center" | "right";
   className?: string;
+  whiteSpace?: "normal" | "nowrap";
 };
 function Typo() {
   return <></>;
@@ -21,6 +22,7 @@ function Heading({
   mt = 0,
   mb = 0,
   className,
+  whiteSpace = "normal",
 }: HeadingProps) {
   return (
     <HeadingTypo
@@ -30,6 +32,7 @@ function Heading({
       $align={align}
       $mt={mt}
       $mb={mb}
+      $whiteSpace={whiteSpace}
     >
       {children}
     </HeadingTypo>
@@ -44,6 +47,7 @@ function Body({
   mt = 0,
   mb = 0,
   className,
+  whiteSpace = "normal",
 }: BodyProps) {
   return (
     <BodyTypo
@@ -53,6 +57,7 @@ function Body({
       $align={align}
       $mt={mt}
       $mb={mb}
+      $whiteSpace={whiteSpace}
     >
       {children}
     </BodyTypo>
@@ -66,9 +71,17 @@ function Desc({
   align = "left",
   mt = 0,
   mb = 0,
+  whiteSpace = "normal",
 }: DescProps) {
   return (
-    <DescTypo className={className} color={color} $align={align} $mt={mt} $mb={mb}>
+    <DescTypo
+      className={className}
+      color={color}
+      $align={align}
+      $mt={mt}
+      $mb={mb}
+      $whiteSpace={whiteSpace}
+    >
       {children}
     </DescTypo>
   );

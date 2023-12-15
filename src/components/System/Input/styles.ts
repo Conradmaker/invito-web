@@ -49,6 +49,24 @@ export const InputBox = styled.div<InputProps & {$focused: boolean; $error: bool
   }
   ${({size}) => {
     switch (size) {
+      case "xs":
+        return css`
+          input {
+            padding: 3.5px 10px;
+            font-size: 11px;
+          }
+          .prefix {
+            padding: 0px 5px;
+            font-size: 11px;
+          }
+          .prefix + input {
+            padding-left: 0px;
+          }
+          svg {
+            width: 14px;
+            height: 14px;
+          }
+        `;
       default:
       case "sm":
         return css`
@@ -126,6 +144,19 @@ export const SwitchBox = styled(RSwitch.Root)<SwitchProps>`
   }
   ${({size}) => {
     switch (size) {
+      case "xs":
+        return css`
+          width: 34px;
+          height: 16px;
+          .radix-switch-thumb {
+            width: 10px;
+            height: 10px;
+            transform: translateX(3px);
+          }
+          .radix-switch-thumb[data-state="checked"] {
+            transform: translateX(21px);
+          }
+        `;
       default:
       case "sm":
         return css`
@@ -274,7 +305,7 @@ export const SliderBox = styled(RSlider.Root)<SliderProps>`
 type RSelectProps = {
   $focused: boolean;
   $error: boolean;
-  size: "sm" | "md" | "lg";
+  size: "xs" | "sm" | "md" | "lg";
 };
 export const RSelectSt = styled.div<RSelectProps>`
   display: flex;
@@ -324,6 +355,21 @@ export const RSelectSt = styled.div<RSelectProps>`
       `}
     ${({size}) => {
       switch (size) {
+        case "xs":
+          return css`
+            padding: 3.5px 10px;
+            font-size: 11px;
+            .prefix {
+              padding: 0px 5px;
+            }
+            .prefix + input {
+              padding-left: 0px;
+            }
+            svg {
+              width: 14px;
+              height: 14px;
+            }
+          `;
         default:
         case "sm":
           return css`
@@ -464,6 +510,20 @@ export const ToggleBox = styled(RToggle.Root)<ToggleStyleProps>`
   }
   ${({size}) => {
     switch (size) {
+      case "xs":
+        return css`
+          padding: 4px;
+          /* padding: 0 12px; */
+          font-size: 11px;
+          svg {
+            width: 15.5px;
+            height: 15.5px;
+          }
+          .toggle-text {
+            margin-left: 1px;
+            margin-right: 4px;
+          }
+        `;
       default:
       case "sm":
         return css`
@@ -548,6 +608,19 @@ export const ToggleGroupBox = styled(RToggleGroup.Root)<ToggleStyleProps>`
     }
     ${({size}) => {
       switch (size) {
+        case "xs":
+          return css`
+            padding: 4.5px;
+            font-size: 11px;
+            svg {
+              width: 14.5px;
+              height: 14.5px;
+            }
+            .toggle-text {
+              margin-left: 2px;
+              margin-right: 3px;
+            }
+          `;
         default:
         case "sm":
           return css`
@@ -600,6 +673,7 @@ export const LabelBox = styled.label<{$direction: LabelProps["direction"]}>`
   & > div {
     display: flex;
     flex-direction: column;
+    white-space: nowrap;
   }
   ${({$direction}) =>
     $direction === "horizontal" &&

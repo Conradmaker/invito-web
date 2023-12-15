@@ -3,7 +3,7 @@ import * as RAccordion from "@radix-ui/react-accordion";
 
 export const AccordionBox = styled(RAccordion.Root)`
   border-radius: 6px;
-  width: 300px;
+  width: 100%;
   background-color: #eee;
   .accordion-item {
     overflow: hidden;
@@ -33,43 +33,34 @@ export const AccordionBox = styled(RAccordion.Root)`
     font-family: inherit;
     background-color: transparent;
     padding: 0 20px;
-    height: 45px;
+    height: 47px;
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    font-size: 15px;
+    justify-content: flex-start;
+    gap: 4px;
+    font-size: 16px;
     line-height: 1;
-    color: #232323;
+    color: ${({theme}) => theme.colors.neutral[900]};
     outline: none;
-    box-shadow: 0 1px 0 #eeeaaa;
-    background-color: #fff;
+    background-color: ${({theme}) => theme.colors.neutral[0]};
     cursor: pointer;
     &:hover {
-      background-color: #fff;
-    }
-    .accordion-btn {
-    }
-    .accordion-btn svg {
-      color: #000;
-      transition: transform 240ms;
+      background-color: ${({theme}) => theme.colors.neutral[0]};
     }
     &[data-state="open"] > .accordion-btn svg {
       transform: rotate(90deg);
+      color: ${({theme}) => theme.colors.neutral[700]};
     }
   }
 
   .accordion-content-box {
     overflow: hidden;
-    font-size: 15px;
-    color: #eee;
-    background-color: #fff;
+    background-color: ${({theme}) => theme.colors.neutral[0]};
     animation-duration: 300ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity, height;
     .accordion-content {
-      padding: 15px 20px;
-      color: #000;
       width: 100%;
     }
     &[data-state="open"] {

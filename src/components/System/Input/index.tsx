@@ -8,7 +8,7 @@ import Toggle from "./Toggle";
 import Label from "./Label";
 
 export type InputProps = {
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   disabled?: boolean;
   placeholder?: string;
   error?: string;
