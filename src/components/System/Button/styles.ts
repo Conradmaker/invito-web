@@ -8,6 +8,7 @@ type StyledBtnProps = ButtonProps & {
 export const ButtonBox = styled.button<StyledBtnProps>`
   border-radius: 4px;
   font-weight: 400;
+  line-height: 1.5;
   font-size: 12px;
   border: none;
   cursor: pointer;

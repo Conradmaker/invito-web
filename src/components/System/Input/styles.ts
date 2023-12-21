@@ -10,7 +10,8 @@ import {SliderProps} from "./Slider";
 import {LabelProps} from "./Label";
 import {ToggleProps} from "./Toggle";
 
-export const InputBox = styled.div<InputProps & {$focused: boolean; $error: boolean}>`
+type InputBoxProps = InputProps & {$focused: boolean; $error: boolean; $width?: number};
+export const InputBox = styled.div<InputBoxProps>`
   transition: all 0.1s ease-in-out;
   position: relative;
   display: flex;
@@ -21,10 +22,15 @@ export const InputBox = styled.div<InputProps & {$focused: boolean; $error: bool
     color: ${({theme}) => theme.colors.neutral[500]};
     white-space: nowrap;
   }
+  ${({$width}) =>
+    $width &&
+    css`
+      width: ${$width}px;
+    `}
   ${({$focused}) => {
     if ($focused)
       return css`
-        box-shadow: 0 0 0 0.5px ${({theme}) => theme.colors.primary[300]} inset,
+        box-shadow: 0 0 0 0.8px ${({theme}) => theme.colors.primary[300]} inset,
           0 0 0 3px ${({theme}) => theme.colors.primary[100]};
       `;
   }}
@@ -685,4 +691,20 @@ export const LabelBox = styled.label<{$direction: LabelProps["direction"]}>`
         flex-direction: column;
       }
     `}
+`;
+
+export const ColorPickerSt = styled.div`
+  .rcp-root.rcp {
+    background-color: ${({theme}) => theme.colors.neutral[0]};
+    .rcp-fields {
+      .rcp-field-input {
+        color: ${({theme}) => theme.colors.neutral[700]};
+        outline: none;
+        border: 1px solid ${({theme}) => theme.colors.neutral[200]};
+        &:focus {
+          border: 1px solid ${({theme}) => theme.colors.primary[300]};
+        }
+      }
+    }
+  }
 `;

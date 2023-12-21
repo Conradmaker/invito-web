@@ -48,6 +48,15 @@ export const AccordionBox = styled(RAccordion.Root)`
     &:hover {
       background-color: ${({theme}) => theme.colors.neutral[0]};
     }
+    .accordion-btn {
+      margin-left: 8px;
+      padding: 4px;
+      svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+    }
     &[data-state="open"] > .accordion-btn svg {
       transform: rotate(90deg);
       color: ${({theme}) => theme.colors.neutral[700]};

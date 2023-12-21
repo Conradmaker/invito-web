@@ -6,6 +6,7 @@ import Slider from "./Slider";
 import Select from "./Select";
 import Toggle from "./Toggle";
 import Label from "./Label";
+import ColorPicker from "./ColorPicker";
 
 export type InputProps = {
   size?: "xs" | "sm" | "md" | "lg";
@@ -14,6 +15,8 @@ export type InputProps = {
   error?: string;
   info?: string;
   prefix?: React.ReactNode;
+  width?: number;
+  value?: string;
 };
 function Input({
   size = "sm",
@@ -22,13 +25,22 @@ function Input({
   error,
   info,
   prefix,
+  width,
+  value,
 }: InputProps) {
   const [focused, setFocused] = useState(false);
   return (
     <div>
-      <InputBox size={size} $focused={focused} disabled={disabled} $error={!!error}>
+      <InputBox
+        $width={width}
+        size={size}
+        $focused={focused}
+        disabled={disabled}
+        $error={!!error}
+      >
         {prefix ? <div className="prefix">{prefix}</div> : null}
         <input
+          value={value}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           type="text"
@@ -50,4 +62,5 @@ Input.Slider = Slider;
 Input.Select = Select;
 Input.Label = Label;
 Input.Toggle = Toggle;
+Input.Color = ColorPicker;
 export default Input;
