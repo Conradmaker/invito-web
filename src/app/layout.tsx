@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type {Metadata} from "next";
 // import {Inter,Gothic_A1} from "next/font/google";
 import "./globals.css";
@@ -13,6 +14,13 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          rel="preload"
+          as="style"
+          href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"
+        />
         <link
           rel="preload"
           as="style"
@@ -20,7 +28,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         />
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Dongle:wght@300;400;700&family=Nanum+Gothic:wght@400;700;800&family=Single+Day&display=swap"
         />
       </head>
       <body>

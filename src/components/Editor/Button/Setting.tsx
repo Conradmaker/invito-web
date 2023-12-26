@@ -59,10 +59,10 @@ export default function ButtonSetting() {
             }
             block
             data={[
-              {label: "X-Small", value: "xs"},
-              {label: "Small", value: "sm"},
-              {label: "Medium", value: "md"},
-              {label: "Large", value: "lg"},
+              {label: "매우 작은 사이즈", value: "xs"},
+              {label: "작은 사이즈", value: "sm"},
+              {label: "보통 사이즈", value: "md"},
+              {label: "큰 사이즈", value: "lg"},
             ]}
             size="sm"
           />

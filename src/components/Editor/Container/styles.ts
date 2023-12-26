@@ -31,8 +31,8 @@ export const ContainerSt = styled.div<ContainerStProps>`
       padding-top: ${props.paddingTop || 0}px;
       padding-bottom: ${props.paddingBottom || 0}px;
       flex-direction: ${props.direction || "row"};
-      justify-content: ${props.direction === "row" ? props.justify : "start"};
-      align-items: ${props.direction === "column" ? props.justify : "start"};
+      justify-content: ${props.direction === "row" ? props.justify : props.align};
+      align-items: ${props.direction === "column" ? props.justify : props.align};
       gap: ${props.gap || 0}px;
     `}
     ${({background}) => {
@@ -70,7 +70,7 @@ export const ContainerSt = styled.div<ContainerStProps>`
     margin-right: ${props.marginRight || 0}px;
     margin-top: ${props.marginTop || 0}px;
     margin-bottom: ${props.marginBottom || 0}px;
-  `} 
+  `}
   ${({background}) => {
     switch (background?.type) {
       case "color":

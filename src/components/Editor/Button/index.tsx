@@ -38,7 +38,7 @@ function Button({text = "버튼", ...rest}: ButtonProps) {
       {selected ? (
         <ContentEditable
           html={text}
-          className={"border border-blue-400"}
+          className="border border-blue-400 outline-none"
           onChange={(e) =>
             setProp(
               (props: ButtonProps) =>
@@ -46,7 +46,6 @@ function Button({text = "버튼", ...rest}: ButtonProps) {
             )
           }
           tagName="p"
-          style={{outline: "none"}}
         />
       ) : (
         text

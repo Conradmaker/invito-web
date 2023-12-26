@@ -22,6 +22,7 @@ export type ContainerConfigType = {
   marginBottom?: number;
   direction?: "row" | "column";
   justify?: "start" | "center" | "end" | "space-between";
+  align?: "start" | "center" | "end" | "space-between";
   gap?: number;
   background: {
     type: "color" | "transparent" | "image";
@@ -90,6 +91,7 @@ function ContainerCreator() {
             gap={0}
             direction="row"
             justify="start"
+            align="start"
             paddingBottom={8}
             paddingLeft={8}
             paddingRight={8}

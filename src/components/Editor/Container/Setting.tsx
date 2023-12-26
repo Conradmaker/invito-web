@@ -4,11 +4,23 @@ import {ContainerProps} from ".";
 import Input from "@/components/System/Input";
 import {
   LuAlignCenter,
+  LuAlignCenterHorizontal,
+  LuAlignCenterVertical,
+  LuAlignEndHorizontal,
+  LuAlignEndVertical,
   LuAlignHorizontalJustifyEnd,
+  LuAlignHorizontalSpaceAround,
+  LuAlignHorizontalSpaceBetween,
   LuAlignJustify,
   LuAlignLeft,
   LuAlignRight,
+  LuAlignStartHorizontal,
+  LuAlignStartVertical,
   LuAlignVerticalJustifyEnd,
+  LuAlignVerticalSpaceAround,
+  LuAlignVerticalSpaceBetween,
+  LuGalleryHorizontalEnd,
+  LuGalleryVerticalEnd,
   LuLink,
 } from "react-icons/lu";
 import Typo from "@/components/System/Typo";
@@ -18,6 +30,7 @@ export default function BoxSetting() {
     minHeight,
     minWidth,
     justify,
+    align,
     direction,
     gap,
     paddingLeft,
@@ -31,23 +44,7 @@ export default function BoxSetting() {
     background,
     click,
     actions: {setProp},
-  } = useNode<ContainerProps>((node) => ({
-    minHeight: node.data.props.minHeight,
-    minWidth: node.data.props.minWidth,
-    justify: node.data.props.justify,
-    direction: node.data.props.direction,
-    gap: node.data.props.gap,
-    paddingLeft: node.data.props.paddingLeft,
-    paddingRight: node.data.props.paddingRight,
-    paddingTop: node.data.props.paddingTop,
-    paddingBottom: node.data.props.paddingBottom,
-    marginLeft: node.data.props.marginLeft,
-    marginRight: node.data.props.marginRight,
-    marginTop: node.data.props.marginTop,
-    marginBottom: node.data.props.marginBottom,
-    background: node.data.props.background,
-    click: node.data.props.click,
-  }));
+  } = useNode<ContainerProps>((node) => node.data.props as ContainerProps);
   return (
     <div className="flex flex-col gap-8 items-start p-4 h-[calc(100vh-48px)] overflow-y-scroll">
       <div className="flex flex-col gap-2">
@@ -55,32 +52,52 @@ export default function BoxSetting() {
           레이아웃
         </Typo.Body>
         <div className="flex flex-col gap-4 mb-6 mt-2">
-          <Input.Toggle.Group
-            block
-            size="sm"
-            value={direction || "row"}
-            onChange={(v) =>
-              setProp((props: ContainerProps) => (props.direction = v as "row"))
-            }
-            data={[
-              {icon: <LuAlignVerticalJustifyEnd />, value: "column", text: "세로 정렬"},
-              {icon: <LuAlignHorizontalJustifyEnd />, value: "row", text: "가로 정렬"},
-            ]}
-          />
-          <Input.Toggle.Group
-            block
-            size="xs"
-            value={justify || "start"}
-            onChange={(v) =>
-              setProp((props: ContainerProps) => (props.justify = v as "start"))
-            }
-            data={[
-              {icon: <LuAlignLeft />, value: "start"},
-              {icon: <LuAlignCenter />, value: "center"},
-              {icon: <LuAlignRight />, value: "end"},
-              {icon: <LuAlignJustify />, value: "space-between"},
-            ]}
-          />
+          <Input.Label title="방향" direction="horizontal" size="sm">
+            <Input.Toggle.Group
+              block
+              size="sm"
+              value={direction || "row"}
+              onChange={(v) =>
+                setProp((props: ContainerProps) => (props.direction = v as "row"))
+              }
+              data={[
+                {icon: <LuGalleryVerticalEnd />, value: "column", text: "세로 방향"},
+                {icon: <LuGalleryHorizontalEnd />, value: "row", text: "가로 방향"},
+              ]}
+            />
+          </Input.Label>
+          <Input.Label title="가로축 정렬" direction="horizontal" size="sm">
+            <Input.Toggle.Group
+              block
+              size="xs"
+              value={justify || "start"}
+              onChange={(v) =>
+                setProp((props: ContainerProps) => (props.justify = v as "start"))
+              }
+              data={[
+                {icon: <LuAlignStartVertical />, value: "start"},
+                {icon: <LuAlignCenterVertical />, value: "center"},
+                {icon: <LuAlignEndVertical />, value: "end"},
+                {icon: <LuAlignHorizontalSpaceBetween />, value: "space-between"},
+              ]}
+            />
+          </Input.Label>
+          <Input.Label title="세로축 정렬" direction="horizontal" size="sm">
+            <Input.Toggle.Group
+              block
+              size="xs"
+              value={align || "start"}
+              onChange={(v) =>
+                setProp((props: ContainerProps) => (props.align = v as "start"))
+              }
+              data={[
+                {icon: <LuAlignStartHorizontal />, value: "start"},
+                {icon: <LuAlignCenterHorizontal />, value: "center"},
+                {icon: <LuAlignEndHorizontal />, value: "end"},
+                {icon: <LuAlignVerticalSpaceBetween />, value: "space-between"},
+              ]}
+            />
+          </Input.Label>
           <Input.Label title="간격" size="sm" direction="horizontal">
             <Input.Slider
               block
