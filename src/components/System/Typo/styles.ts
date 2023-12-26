@@ -76,9 +76,11 @@ export const HeadingTypo = styled(TypoSt)<{$level: HeadingProps["level"]}>`
     }
   }}
 `;
-export const BodyTypo = styled(TypoSt)<{
+type BodyStyle = {
   $weight?: BodyProps["weight"];
-}>`
+};
+export const BodyTypo = styled(TypoSt)<BodyStyle>`
+  display: inline-block;
   font-size: 14px;
   line-height: 22px;
   /* font-feature-settings: "ss03"; */
@@ -100,6 +102,7 @@ export const BodyTypo = styled(TypoSt)<{
   }}
 `;
 export const DescTypo = styled(TypoSt)`
+  display: inline-block;
   font-size: 12px;
   ${({theme, color}) => {
     switch (color) {

@@ -10,7 +10,13 @@ import {SliderProps} from "./Slider";
 import {LabelProps} from "./Label";
 import {ToggleProps} from "./Toggle";
 
-type InputBoxProps = InputProps & {$focused: boolean; $error: boolean; $width?: number};
+type InputBoxProps = InputProps & {
+  $focused: boolean;
+  $error: boolean;
+  $width?: number;
+  $bordered: boolean;
+  $textAlign?: string;
+};
 export const InputBox = styled.div<InputBoxProps>`
   transition: all 0.1s ease-in-out;
   position: relative;
@@ -18,6 +24,7 @@ export const InputBox = styled.div<InputBoxProps>`
   border-radius: 4px;
   box-shadow: 0 0 0 1px ${({theme}) => theme.colors.neutral[200]} inset;
   align-items: center;
+  white-space: nowrap;
   .prefix {
     color: ${({theme}) => theme.colors.neutral[500]};
     white-space: nowrap;
@@ -27,23 +34,29 @@ export const InputBox = styled.div<InputBoxProps>`
     css`
       width: ${$width}px;
     `}
-  ${({$focused}) => {
-    if ($focused)
-      return css`
-        box-shadow: 0 0 0 0.8px ${({theme}) => theme.colors.primary[300]} inset,
-          0 0 0 3px ${({theme}) => theme.colors.primary[100]};
-      `;
-  }}
-  ${({error}) =>
+  ${({$focused, theme}) =>
+    $focused &&
+    css`
+      box-shadow: 0 0 0 0.8px ${theme.colors.primary[300]} inset,
+        0 0 0 3px ${theme.colors.primary[100]};
+    `}
+  ${({error, theme}) =>
     error &&
     css`
-      box-shadow: 0 0 0 1px ${({theme}) => theme.colors.danger[300]} inset;
+      box-shadow: 0 0 0 1px ${theme.colors.danger[300]} inset;
     `}
-  ${({disabled}) =>
+
+  ${({$bordered, theme}) =>
+    !$bordered &&
+    css`
+      box-shadow: 0 0 0 0px ${theme.colors.danger[300]} inset;
+    `}
+  ${({disabled, theme}) =>
     disabled &&
     css`
-      background-color: ${({theme}) => theme.colors.neutral[100]};
+      background-color: ${theme.colors.neutral[100]};
     `}
+
   & > input {
     background-color: transparent;
     outline: none;
@@ -52,7 +65,19 @@ export const InputBox = styled.div<InputBoxProps>`
     &::placeholder {
       color: ${({theme}) => theme.colors.neutral[200]};
     }
+    &[type="number"]::-webkit-outer-spin-button,
+    &[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
+  ${({$textAlign}) =>
+    $textAlign &&
+    css`
+      & > input {
+        text-align: ${$textAlign || "left"};
+      }
+    `}
   ${({size}) => {
     switch (size) {
       case "xs":
@@ -237,13 +262,33 @@ export const SliderBox = styled(RSlider.Root)<SliderProps>`
     box-shadow: 0 0 0 1.5px ${({theme}) => theme.colors.primary[300]} inset,
       0 2px 2px ${({theme}) => theme.colors.primary[200]};
     border-radius: 50px;
+    position: relative;
+    .rx-slider-value {
+      display: none;
+      top: -25px;
+      left: 50%;
+      font-size: 12px;
+      position: absolute;
+      padding: 0px 4px;
+      border-radius: 4px;
+      transform: translateX(-50%);
+      border: 1px solid ${({theme}) => theme.colors.primary[300]};
+      background-color: ${({theme}) => theme.colors.neutral[0]};
+      color: ${({theme}) => theme.colors.primary[400]};
+    }
     &:hover {
       background-color: ${({theme}) => theme.colors.primary[100]};
       box-shadow: 0 2px 5px ${({theme}) => theme.colors.primary[300]};
+      .rx-slider-value {
+        display: flex;
+      }
     }
 
     &:active {
       background-color: ${({theme}) => theme.colors.primary[100]};
+      .rx-slider-thumb .rx-slider-value {
+        top: -25px;
+      }
     }
   }
 
@@ -253,14 +298,13 @@ export const SliderBox = styled(RSlider.Root)<SliderProps>`
       case "sm":
         return css`
           height: 20px;
-          width: 200px;
+          min-width: 150px;
           .rx-slider-track {
             height: 3px;
           }
           .rx-slider-thumb {
             width: ${shape === "bar" ? 6 : 14}px;
             height: 14px;
-
             &:active {
               width: 8px;
               height: 8px;
@@ -270,7 +314,7 @@ export const SliderBox = styled(RSlider.Root)<SliderProps>`
         `;
       case "md":
         return css`
-          width: 250px;
+          min-width: 200px;
           height: 22px;
           .rx-slider-track {
             height: 4px;
@@ -288,7 +332,7 @@ export const SliderBox = styled(RSlider.Root)<SliderProps>`
         `;
       case "lg":
         return css`
-          width: 300px;
+          min-width: 200px;
           height: 24px;
           .rx-slider-track {
             height: 5px;
@@ -306,15 +350,27 @@ export const SliderBox = styled(RSlider.Root)<SliderProps>`
         `;
     }
   }}
+  ${({block}) =>
+    block &&
+    css`
+      width: 100%;
+    `}
 `;
 
 type RSelectProps = {
   $focused: boolean;
   $error: boolean;
+  $block: boolean;
   size: "xs" | "sm" | "md" | "lg";
 };
 export const RSelectSt = styled.div<RSelectProps>`
   display: flex;
+  ${({$block}) =>
+    $block &&
+    css`
+      width: 100%;
+      flex: 1;
+    `}
   .select-trigger {
     flex: 1;
     transition: all 0.1s ease-in-out;
@@ -359,6 +415,14 @@ export const RSelectSt = styled.div<RSelectProps>`
         box-shadow: 0 0 0 0.5px ${({theme}) => theme.colors.primary[300]} inset,
           0 0 0 3px ${({theme}) => theme.colors.primary[100]};
       `}
+
+    ${({$block}) =>
+      $block &&
+      css`
+        width: 100%;
+        flex: 1;
+      `}
+
     ${({size}) => {
       switch (size) {
         case "xs":
@@ -489,6 +553,7 @@ export const SelectContentSt = styled(RSelect.Content)`
 
 type ToggleStyleProps = {
   size: ToggleProps["size"];
+  $block: ToggleProps["block"];
 };
 export const ToggleBox = styled(RToggle.Root)<ToggleStyleProps>`
   background-color: ${({theme}) => theme.colors.neutral[0]};
@@ -501,6 +566,7 @@ export const ToggleBox = styled(RToggle.Root)<ToggleStyleProps>`
   justify-content: center;
   box-shadow: 0 0px 1px ${({theme}) => theme.colors.neutral[500]} inset;
   transition: all 0.2s ease-in-out;
+
   &:hover {
     background-color: ${({theme}) => theme.colors.neutral[100]};
   }
@@ -580,6 +646,17 @@ export const ToggleGroupBox = styled(RToggleGroup.Root)<ToggleStyleProps>`
   background-color: ${({theme}) => theme.colors.neutral[200]};
   border-radius: 4px;
   box-shadow: 0 0px 1px ${({theme}) => theme.colors.neutral[500]};
+  ${({$block}) =>
+    $block &&
+    css`
+      flex: 1;
+      display: flex;
+      width: 100%;
+      .toggle-group-item {
+        flex: 1;
+        gap: 2px;
+      }
+    `}
   .toggle-group-item {
     background-color: ${({theme}) => theme.colors.neutral[0]};
     color: ${({theme}) => theme.colors.neutral[600]};
@@ -675,8 +752,10 @@ export const ToggleGroupBox = styled(RToggleGroup.Root)<ToggleStyleProps>`
 export const LabelBox = styled.label<{$direction: LabelProps["direction"]}>`
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 6px;
-  & > div {
+  & > .label {
+    flex: 1;
     display: flex;
     flex-direction: column;
     white-space: nowrap;
@@ -686,9 +765,12 @@ export const LabelBox = styled.label<{$direction: LabelProps["direction"]}>`
     css`
       flex-direction: row;
       align-items: center;
-      & > div {
+      & > .label {
         display: flex;
         flex-direction: column;
+      }
+      & > div {
+        flex: 1;
       }
     `}
 `;
@@ -706,5 +788,35 @@ export const ColorPickerSt = styled.div`
         }
       }
     }
+  }
+`;
+
+export const ImgInputBox = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  .preview {
+    position: relative;
+    padding-top: 60%;
+    width: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  .btn-box {
+    width: 100%;
+    display: flex;
+    gap: 4px;
   }
 `;

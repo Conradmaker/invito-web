@@ -19,7 +19,7 @@ export default function Label({
   return (
     <LabelBox $direction={direction}>
       {direction === "vertical" ? (
-        <div>
+        <div className="label">
           {size !== "sm" ? (
             <>
               <Typo.Body whiteSpace="nowrap" weight="medium" className="label-head">

@@ -14,6 +14,7 @@ export type ButtonProps = {
   disabled?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  onClick?: () => void;
   className?: string;
 };
 function Button({
@@ -26,9 +27,14 @@ function Button({
   leftIcon,
   rightIcon,
   className,
+  onClick,
 }: ButtonProps) {
+  const onPress = () => {
+    if (!disabled && onClick) onClick();
+  };
   return (
     <ButtonBox
+      onClick={onPress}
       className={className}
       $styleType={type}
       $block={block}
@@ -51,9 +57,14 @@ function IconButton({
   disabled = false,
   className,
   children,
+  onClick,
 }: IconButtonProps) {
+  const onPress = () => {
+    if (!disabled && onClick) onClick();
+  };
   return (
     <IconButtonBox
+      onClick={onPress}
       className={className}
       $styleType={type}
       $block={block}

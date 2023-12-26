@@ -7,6 +7,7 @@ import Select from "./Select";
 import Toggle from "./Toggle";
 import Label from "./Label";
 import ColorPicker from "./ColorPicker";
+import Image from "./Image";
 
 export type InputProps = {
   size?: "xs" | "sm" | "md" | "lg";
@@ -16,36 +17,58 @@ export type InputProps = {
   info?: string;
   prefix?: React.ReactNode;
   width?: number;
-  value?: string;
+  value?: string | number;
+  textAlign?: "left" | "center" | "right";
+  bordered?: boolean;
+  className?: string;
+  type?: "text" | "number" | "password";
+  min?: number;
+  max?: number;
+  maxLength?: number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 function Input({
   size = "sm",
   disabled = false,
-  placeholder,
   error,
   info,
   prefix,
   width,
+  textAlign = "left",
+  bordered = true,
+  className,
+  type = "text",
   value,
+  min,
+  max,
+  maxLength,
+  placeholder,
+  onChange,
 }: InputProps) {
   const [focused, setFocused] = useState(false);
   return (
-    <div>
+    <div className={className}>
       <InputBox
         $width={width}
         size={size}
         $focused={focused}
         disabled={disabled}
         $error={!!error}
+        $bordered={bordered}
+        $textAlign={textAlign}
       >
         {prefix ? <div className="prefix">{prefix}</div> : null}
         <input
-          value={value}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          type="text"
+          type={type}
           disabled={disabled}
+          min={min}
+          max={max}
+          maxLength={maxLength}
           placeholder={placeholder}
+          value={type === "number" ? Number(value) || "0" : value}
+          onChange={onChange}
         />
       </InputBox>
       {error ? (
@@ -63,4 +86,5 @@ Input.Select = Select;
 Input.Label = Label;
 Input.Toggle = Toggle;
 Input.Color = ColorPicker;
+Input.Image = Image;
 export default Input;

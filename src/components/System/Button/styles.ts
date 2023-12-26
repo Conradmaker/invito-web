@@ -15,6 +15,7 @@ export const ButtonBox = styled.button<StyledBtnProps>`
   transition: all 0.1s ease-in-out;
   display: block;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   display: inline-flex;
   white-space: nowrap;
@@ -141,7 +142,7 @@ export const ButtonBox = styled.button<StyledBtnProps>`
         color: ${theme.colors.neutral[300]};
       }
     `}
-    ${({$block}) =>
+  ${({$block}) =>
     $block &&
     css`
       display: flex;

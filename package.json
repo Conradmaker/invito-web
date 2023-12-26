@@ -22,6 +22,8 @@
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "axios": "^1.6.2",
+    "dayjs": "^1.11.10",
     "next": "14.0.4",
     "polished": "^4.2.2",
     "react": "^18",
@@ -30,12 +32,14 @@
     "react-contenteditable": "^3.3.7",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",

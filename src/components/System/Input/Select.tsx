@@ -10,7 +10,17 @@ export type SelectProps = {
   placeholder?: string;
   error?: string;
   info?: string;
+  block?: boolean;
+  value?: string;
+  onChange?: (value: string) => void;
   prefix?: React.ReactNode;
+  data:
+    | {
+        label: string;
+        value: string;
+        children?: {label: string; value: string}[];
+      }[];
+  className?: string;
 };
 export default function Select({
   size = "sm",
@@ -19,12 +29,27 @@ export default function Select({
   error,
   info,
   prefix,
+  data,
+  value,
+  onChange,
+  block = false,
+  className,
 }: SelectProps) {
   const [focused, setFocused] = useState(false);
   return (
-    <div>
-      <RSelectSt $focused={focused} $error={false} size={size}>
-        <RSelect.Root onOpenChange={(open) => setFocused(open)}>
+    <>
+      <RSelectSt
+        className={className}
+        $block={block}
+        $focused={focused}
+        $error={false}
+        size={size}
+      >
+        <RSelect.Root
+          onOpenChange={(open) => setFocused(open)}
+          value={value}
+          onValueChange={onChange}
+        >
           <RSelect.Trigger className="select-trigger" disabled={disabled}>
             <RSelect.Value placeholder={placeholder} />
             <RSelect.Icon className="select-icon">
@@ -40,38 +65,37 @@ export default function Select({
                 <RxArrowUp />
               </RSelect.ScrollUpButton>
               <RSelect.Viewport className="select-viewport">
-                <RSelect.Group>
-                  <RSelect.Label className="select-label">Vegetables</RSelect.Label>
-                  <RSelect.Item value="1" className="select-item">
-                    <RSelect.ItemText>test1</RSelect.ItemText>
-                    <RSelect.ItemIndicator className="select-item-indicator">
-                      <RxDotFilled />
-                    </RSelect.ItemIndicator>
-                  </RSelect.Item>
-                </RSelect.Group>
-
-                <RSelect.Separator className="select-separator" />
-                <RSelect.Group>
-                  <RSelect.Label className="select-label">Group2</RSelect.Label>
-                  <RSelect.Item value="2" className="select-item">
-                    <RSelect.ItemText>test2</RSelect.ItemText>
-                    <RSelect.ItemIndicator className="select-item-indicator">
-                      <RxDotFilled />
-                    </RSelect.ItemIndicator>
-                  </RSelect.Item>
-                  <RSelect.Item value="3" className="select-item">
-                    <RSelect.ItemText>test3</RSelect.ItemText>
-                    <RSelect.ItemIndicator className="select-item-indicator">
-                      <RxDotFilled />
-                    </RSelect.ItemIndicator>
-                  </RSelect.Item>
-                  <RSelect.Item value="4" className="select-item" disabled>
-                    <RSelect.ItemText>test4</RSelect.ItemText>
-                    <RSelect.ItemIndicator className="select-item-indicator">
-                      <RxDotFilled />
-                    </RSelect.ItemIndicator>
-                  </RSelect.Item>
-                </RSelect.Group>
+                {data?.map((d, idx) => {
+                  if (d.children) {
+                    return (
+                      <React.Fragment key={d.value}>
+                        {idx !== 0 && <RSelect.Separator className="select-separator" />}
+                        <RSelect.Group>
+                          <RSelect.Label className="select-label">
+                            {d.label}
+                          </RSelect.Label>
+                          {d.children.map((c) => (
+                            <RSelect.Item value="1" className="select-item" key={c.value}>
+                              <RSelect.ItemText>{c.label}</RSelect.ItemText>
+                              <RSelect.ItemIndicator className="select-item-indicator">
+                                <RxDotFilled />
+                              </RSelect.ItemIndicator>
+                            </RSelect.Item>
+                          ))}
+                        </RSelect.Group>
+                      </React.Fragment>
+                    );
+                  } else {
+                    return (
+                      <RSelect.Item value={d.value} className="select-item" key={d.value}>
+                        <RSelect.ItemText>{d.label}</RSelect.ItemText>
+                        <RSelect.ItemIndicator className="select-item-indicator">
+                          <RxDotFilled />
+                        </RSelect.ItemIndicator>
+                      </RSelect.Item>
+                    );
+                  }
+                })}
               </RSelect.Viewport>
               <RSelect.ScrollDownButton className="select-scroll-button">
                 <RxArrowDown />
@@ -86,6 +110,6 @@ export default function Select({
       ) : info ? (
         <Typo.Body color="secondary">&nbsp;{info}</Typo.Body>
       ) : null}
-    </div>
+    </>
   );
 }
