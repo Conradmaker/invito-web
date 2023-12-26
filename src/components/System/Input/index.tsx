@@ -26,6 +26,7 @@ export type InputProps = {
   max?: number;
   maxLength?: number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  block?: boolean;
 };
 function Input({
   size = "sm",
@@ -44,6 +45,7 @@ function Input({
   maxLength,
   placeholder,
   onChange,
+  block,
 }: InputProps) {
   const [focused, setFocused] = useState(false);
   return (
@@ -56,6 +58,7 @@ function Input({
         $error={!!error}
         $bordered={bordered}
         $textAlign={textAlign}
+        block={block}
       >
         {prefix ? <div className="prefix">{prefix}</div> : null}
         <input

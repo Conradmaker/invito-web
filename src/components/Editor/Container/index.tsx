@@ -10,6 +10,8 @@ import {ContainerSt} from "./styles";
 import {LuLink} from "react-icons/lu";
 
 export type ContainerConfigType = {
+  minWidth?: number;
+  minHeight?: number;
   paddingLeft?: number;
   paddingRight?: number;
   paddingTop?: number;
@@ -96,6 +98,8 @@ function ContainerCreator() {
             marginLeft={0}
             marginRight={0}
             marginTop={0}
+            minHeight={60}
+            minWidth={100}
             background={{type: "transparent", filter: {type: "none", blur: 0}}}
             click={{type: "none"}}
           />

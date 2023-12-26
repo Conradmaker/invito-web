@@ -72,7 +72,9 @@ export default function page() {
                     paddingRight={8}
                     paddingTop={8}
                     direction="column"
-                    background={{type: "transparent", filter: "none"}}
+                    background={{type: "transparent", filter: {type: "none", blur: 0}}}
+                    minHeight={240}
+                    minWidth={320}
                     click={{type: "none"}}
                     canvas
                   ></Element>

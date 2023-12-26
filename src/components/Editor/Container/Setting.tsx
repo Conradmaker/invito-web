@@ -12,10 +12,11 @@ import {
   LuLink,
 } from "react-icons/lu";
 import Typo from "@/components/System/Typo";
-import Button from "@/components/System/Button";
 
 export default function BoxSetting() {
   const {
+    minHeight,
+    minWidth,
     justify,
     direction,
     gap,
@@ -31,6 +32,8 @@ export default function BoxSetting() {
     click,
     actions: {setProp},
   } = useNode<ContainerProps>((node) => ({
+    minHeight: node.data.props.minHeight,
+    minWidth: node.data.props.minWidth,
     justify: node.data.props.justify,
     direction: node.data.props.direction,
     gap: node.data.props.gap,
@@ -245,53 +248,27 @@ export default function BoxSetting() {
         </div>
         <div className="flex gap-4">
           <div className="flex-1">
-            <Input.Label title="좌우" size="sm" direction="horizontal">
+            <Input.Label title="최소 높이" size="sm" direction="horizontal">
               <Input
                 size="sm"
-                value={
-                  paddingLeft === paddingRight
-                    ? paddingLeft + ""
-                    : `${paddingLeft}|${paddingRight}`
-                }
-                max={140}
                 min={1}
-                onChange={({target}) => {
-                  if (
-                    !Number.isNaN(Number(target.value)) &&
-                    typeof Number(target.value) === "number" &&
-                    +target.value <= 140
-                  )
-                    setProp((props: ContainerProps) => {
-                      props.paddingLeft = +target.value;
-                      props.paddingRight = +target.value;
-                    });
-                }}
+                value={minHeight}
+                onChange={({target}) =>
+                  setProp((props: ContainerProps) => (props.minHeight = +target.value))
+                }
               />
             </Input.Label>
           </div>
           <div className="flex-1">
-            <Input.Label title="상하" size="sm" direction="horizontal">
+            <Input.Label title="최소 너비" size="sm" direction="horizontal">
               <Input
                 className="w-full"
                 size="sm"
-                max={140}
                 min={1}
-                value={
-                  paddingTop === paddingBottom
-                    ? paddingTop + ""
-                    : `${paddingTop}|${paddingBottom}`
+                value={minWidth}
+                onChange={({target}) =>
+                  setProp((props: ContainerProps) => (props.minWidth = +target.value))
                 }
-                onChange={({target}) => {
-                  if (
-                    !Number.isNaN(Number(target.value)) &&
-                    typeof Number(target.value) === "number" &&
-                    +target.value <= 140
-                  )
-                    setProp((props: ContainerProps) => {
-                      props.paddingTop = +target.value;
-                      props.paddingBottom = +target.value;
-                    });
-                }}
               />
             </Input.Label>
           </div>

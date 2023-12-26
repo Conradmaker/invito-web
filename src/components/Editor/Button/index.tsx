@@ -5,19 +5,23 @@ import ContentEditable from "react-contenteditable";
 import ButtonSettings from "./Setting";
 import useNodeState from "@/hooks/useNodeState";
 import {ButtonStyle} from "./styles";
-import {RxComponent2, RxLayers, RxMove} from "react-icons/rx";
+import {RxMove} from "react-icons/rx";
 import {CreatorCardBox} from "../Toolbar/styles";
 import Typo from "@/components/System/Typo";
+import {LuLink} from "react-icons/lu";
 
-export type ButtonStyleProps = {
-  color?: string;
-  size?: "xs" | "lg" | "md" | "sm";
+export type ButtonConfigProps = {
+  size?: "xs" | "sm" | "lg" | "md";
   block?: boolean;
-};
-export type ButtonProps = {
   text?: string;
-} & ButtonStyleProps;
-function Button({text = "버튼"}: ButtonProps) {
+  color: {background: string; text: string};
+  click: {
+    type: "none" | "link" | "modal";
+    link?: string;
+  };
+};
+export type ButtonProps = {} & ButtonConfigProps;
+function Button({text = "버튼", ...rest}: ButtonProps) {
   const {
     connectors: {connect, drag},
     actions: {setProp},
@@ -25,6 +29,7 @@ function Button({text = "버튼"}: ButtonProps) {
   const {hovered, selected} = useNodeState();
   return (
     <ButtonStyle
+      {...rest}
       className={
         hovered ? "bg-white border-blue-100 border-2 px-4 py-2 relative" : "relative"
       }
@@ -33,6 +38,7 @@ function Button({text = "버튼"}: ButtonProps) {
       {selected ? (
         <ContentEditable
           html={text}
+          className={"border border-blue-400"}
           onChange={(e) =>
             setProp(
               (props: ButtonProps) =>
@@ -46,10 +52,19 @@ function Button({text = "버튼"}: ButtonProps) {
         text
       )}
       {selected && (
-        <div className="absolute gap-1 text-xs h-6 -top-6 bg-blue-600 text-white flex items-center px-2 -left-[1px]">
+        <div className="absolute gap-1 text-xs h-6 -top-6 bg-blue-600 text-white flex items-center px-2 -left-[1px] whitespace-nowrap">
           <RxMove className="cursor-move" size={12} />{" "}
-          <div className="h-4 w-[1px] bg-slate-400 mx-1" /> <RxComponent2 size={12} />{" "}
+          <div className="h-4 w-[1px] bg-slate-400 mx-1" />
           버튼
+          {rest.click.link && (
+            <div
+              className="text-xs flex items-center gap-1 ml-2 cursor-pointer"
+              onClick={() => window.open(rest.click.link, "_blank")}
+            >
+              <LuLink size={10} />
+              {rest.click.link.slice(0, 20)}
+            </div>
+          )}
         </div>
       )}
     </ButtonStyle>
@@ -59,7 +74,18 @@ function ButtonCreator() {
   const {connectors, query} = useEditor();
   return (
     <CreatorCardBox
-      ref={(ref: HTMLDivElement) => connectors.create(ref, <Button text="버튼" />)}
+      ref={(ref: HTMLDivElement) =>
+        connectors.create(
+          ref,
+          <Button
+            color={{background: "#4945FF", text: "#ffffff"}}
+            click={{type: "none"}}
+            size="sm"
+            block={false}
+            text="버튼"
+          />
+        )
+      }
     >
       <img
         src="https://turnupstatic.blob.core.windows.net/assets/overview/button.png"

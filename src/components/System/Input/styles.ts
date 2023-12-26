@@ -34,6 +34,12 @@ export const InputBox = styled.div<InputBoxProps>`
     css`
       width: ${$width}px;
     `}
+  ${({block}) =>
+    block &&
+    css`
+      flex: 1;
+      width: 100%;
+    `}
   ${({$focused, theme}) =>
     $focused &&
     css`

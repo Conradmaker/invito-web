@@ -6,8 +6,12 @@ export const ContainerSt = styled.div<ContainerStProps>`
   position: relative;
   flex: 1;
   width: 100%;
+  overflow: hidden;
+  min-height: ${(props) => props.minHeight || 0}px;
+  min-width: ${(props) => props.minWidth || 0}px;
   & > div {
-    min-height: 60px;
+    min-height: ${(props) => props.minHeight || 0}px;
+    min-width: ${(props) => props.minWidth || 0}px;
     border-width: 1px;
     border-style: ${({$selected}) => ($selected ? "solid" : "dashed")};
     border-color: ${({$selected, $hovered, theme}) =>
@@ -27,7 +31,8 @@ export const ContainerSt = styled.div<ContainerStProps>`
       padding-top: ${props.paddingTop || 0}px;
       padding-bottom: ${props.paddingBottom || 0}px;
       flex-direction: ${props.direction || "row"};
-      justify-content: ${props.justify || "start"};
+      justify-content: ${props.direction === "row" ? props.justify : "start"};
+      align-items: ${props.direction === "column" ? props.justify : "start"};
       gap: ${props.gap || 0}px;
     `}
     ${({background}) => {
@@ -65,8 +70,7 @@ export const ContainerSt = styled.div<ContainerStProps>`
     margin-right: ${props.marginRight || 0}px;
     margin-top: ${props.marginTop || 0}px;
     margin-bottom: ${props.marginBottom || 0}px;
-  `}
-  /* overflow: hidden; */
+  `} 
   ${({background}) => {
     switch (background?.type) {
       case "color":
