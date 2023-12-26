@@ -4,14 +4,15 @@ import {ContainerConfigType} from ".";
 type ContainerStProps = {$selected: boolean; $hovered: boolean} & ContainerConfigType;
 export const ContainerSt = styled.div<ContainerStProps>`
   position: relative;
-  flex: 1;
-  width: 100%;
-  overflow: hidden;
-  min-height: ${(props) => props.minHeight || 0}px;
-  min-width: ${(props) => props.minWidth || 0}px;
+  max-width: 100%;
+  max-height: 100%;
+  ${(props) => css`
+    width: ${props.width.value}${props.width.unit};
+    height: ${props.height.value}${props.height.unit};
+  `};
   & > div {
-    min-height: ${(props) => props.minHeight || 0}px;
-    min-width: ${(props) => props.minWidth || 0}px;
+    height: 100%;
+    width: 100%;
     border-width: 1px;
     border-style: ${({$selected}) => ($selected ? "solid" : "dashed")};
     border-color: ${({$selected, $hovered, theme}) =>
@@ -20,7 +21,6 @@ export const ContainerSt = styled.div<ContainerStProps>`
         : $hovered
         ? theme.colors.primary[200]
         : "#eee"};
-    width: 100%;
     flex: 1;
     display: flex;
     align-items: flex-start;

@@ -9,6 +9,7 @@ import FontSelector, {fontVars, fontWeightVars} from "./FontSelector";
 export default function TextSetting() {
   const {
     text,
+    width,
     weight,
     size,
     align,
@@ -82,6 +83,34 @@ export default function TextSetting() {
             value={color || "#000000"}
             onChange={(v) => setProp((props: TextProps) => (props.color = v))}
           />
+        </Input.Label>
+      </div>
+      <div className="flex flex-col gap-2 w-full">
+        <Input.Label title="너비" size="sm" direction="horizontal">
+          <div className="flex gap-1">
+            <Input
+              className="w-full"
+              size="xs"
+              min={1}
+              value={width.value}
+              onChange={({target}) =>
+                setProp((props: TextProps) => (props.width.value = +target.value))
+              }
+            />
+            <Input.Select
+              className="w-24"
+              size="xs"
+              value={width.unit}
+              data={[
+                {label: "자동", value: "auto"},
+                {label: "px", value: "px"},
+                {label: "%", value: "%"},
+              ]}
+              onChange={(v) =>
+                setProp((props: TextProps) => (props.width.unit = v as "%"))
+              }
+            />
+          </div>
         </Input.Label>
       </div>
     </div>

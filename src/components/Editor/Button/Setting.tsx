@@ -3,7 +3,7 @@ import React from "react";
 import {ButtonProps} from ".";
 import Typo from "@/components/System/Typo";
 import Input from "@/components/System/Input";
-import {LuLink} from "react-icons/lu";
+import {LuCircle, LuLink, LuSquare} from "react-icons/lu";
 
 export default function ButtonSetting() {
   const {
@@ -12,6 +12,7 @@ export default function ButtonSetting() {
     size,
     color,
     block,
+    shape,
     actions: {setProp},
   } = useNode<ButtonProps>((node) => node.data.props as ButtonProps);
   console.log(block);
@@ -49,6 +50,22 @@ export default function ButtonSetting() {
         <Typo.Body color="secondary" mb={2}>
           스타일
         </Typo.Body>
+        <Input.Label title="모서리" size="sm" direction="horizontal">
+          <Input.Toggle.Group
+            block
+            size="sm"
+            value={shape}
+            onChange={(value) => {
+              setProp((props: ButtonProps) => {
+                props.shape = value as "round" | "square";
+              });
+            }}
+            data={[
+              {icon: <LuCircle />, text: "라운드", value: "round"},
+              {icon: <LuSquare />, text: "스퀘어", value: "square"},
+            ]}
+          />
+        </Input.Label>
         <Input.Label title="크기" direction="horizontal" size="sm">
           <Input.Select
             value={size}

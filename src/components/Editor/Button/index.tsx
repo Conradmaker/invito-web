@@ -9,12 +9,14 @@ import {RxMove} from "react-icons/rx";
 import {CreatorCardBox} from "../Toolbar/styles";
 import Typo from "@/components/System/Typo";
 import {LuLink} from "react-icons/lu";
+import {TextContentEditBox} from "../Text/styles";
 
 export type ButtonConfigProps = {
   size?: "xs" | "sm" | "lg" | "md";
   block?: boolean;
   text?: string;
   color: {background: string; text: string};
+  shape: "round" | "square";
   click: {
     type: "none" | "link" | "modal";
     link?: string;
@@ -36,9 +38,8 @@ function Button({text = "버튼", ...rest}: ButtonProps) {
       ref={(ref: HTMLButtonElement) => connect(drag(ref))}
     >
       {selected ? (
-        <ContentEditable
+        <TextContentEditBox
           html={text}
-          className="border border-blue-400 outline-none"
           onChange={(e) =>
             setProp(
               (props: ButtonProps) =>
@@ -77,6 +78,7 @@ function ButtonCreator() {
         connectors.create(
           ref,
           <Button
+            shape="square"
             color={{background: "#4945FF", text: "#ffffff"}}
             click={{type: "none"}}
             size="sm"

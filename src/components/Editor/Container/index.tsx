@@ -10,8 +10,8 @@ import {ContainerSt} from "./styles";
 import {LuLink} from "react-icons/lu";
 
 export type ContainerConfigType = {
-  minWidth?: number;
-  minHeight?: number;
+  width: {value: number; unit: "px" | "%"};
+  height: {value: number; unit: "px" | "%"};
   paddingLeft?: number;
   paddingRight?: number;
   paddingTop?: number;
@@ -52,7 +52,6 @@ export default function Container({children, ...rest}: ContainerProps) {
       {...rest}
       $hovered={hovered}
       $selected={selected}
-      className={`bg-opacity-40`}
       ref={(ref) => connect(drag(ref as HTMLDivElement))}
     >
       <div>
@@ -100,8 +99,8 @@ function ContainerCreator() {
             marginLeft={0}
             marginRight={0}
             marginTop={0}
-            minHeight={60}
-            minWidth={100}
+            height={{value: 100, unit: "px"}}
+            width={{value: 100, unit: "%"}}
             background={{type: "transparent", filter: {type: "none", blur: 0}}}
             click={{type: "none"}}
           />

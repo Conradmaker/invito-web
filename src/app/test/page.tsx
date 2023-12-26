@@ -30,8 +30,8 @@ export default function page() {
                   보기모드
                   <Input.Switch
                     size="xs"
-                    // checked={editable}
-                    // onChange={(e) => setEditable(e.target.checked)}
+                    checked={editable}
+                    onChange={(e) => setEditable(e)}
                   />
                 </label>
                 <label className="flex gap-1 items-center text-xs">
@@ -73,8 +73,8 @@ export default function page() {
                     paddingTop={8}
                     direction="column"
                     background={{type: "transparent", filter: {type: "none", blur: 0}}}
-                    minHeight={240}
-                    minWidth={320}
+                    height={{value: 100, unit: "%"}}
+                    width={{value: 100, unit: "%"}}
                     click={{type: "none"}}
                     canvas
                   ></Element>

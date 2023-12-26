@@ -31,6 +31,12 @@ export const ButtonStyle = styled.button<ButtonProps>`
       width: 100%;
     `}
 
+  ${({shape}) =>
+    shape === "round" &&
+    css`
+      border-radius: 50px;
+    `}
+
 
   ${({size}) => {
     switch (size) {

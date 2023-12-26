@@ -3,21 +3,13 @@ import React from "react";
 import {ContainerProps} from ".";
 import Input from "@/components/System/Input";
 import {
-  LuAlignCenter,
   LuAlignCenterHorizontal,
   LuAlignCenterVertical,
   LuAlignEndHorizontal,
   LuAlignEndVertical,
-  LuAlignHorizontalJustifyEnd,
-  LuAlignHorizontalSpaceAround,
   LuAlignHorizontalSpaceBetween,
-  LuAlignJustify,
-  LuAlignLeft,
-  LuAlignRight,
   LuAlignStartHorizontal,
   LuAlignStartVertical,
-  LuAlignVerticalJustifyEnd,
-  LuAlignVerticalSpaceAround,
   LuAlignVerticalSpaceBetween,
   LuGalleryHorizontalEnd,
   LuGalleryVerticalEnd,
@@ -27,8 +19,8 @@ import Typo from "@/components/System/Typo";
 
 export default function BoxSetting() {
   const {
-    minHeight,
-    minWidth,
+    height,
+    width,
     justify,
     align,
     direction,
@@ -107,10 +99,81 @@ export default function BoxSetting() {
             />
           </Input.Label>
         </div>
-        <div className="flex border border-dashed rounded-lg bg-blue-50 items-center justify-center w-full py-6 px-11 relative">
-          <Typo.Desc className="absolute top-1 left-2" color="secondary">
+
+        <div className="flex flex-col gap-2">
+          <div className="flex-1">
+            <Input.Label title="높이" size="sm" direction="horizontal">
+              <div className="flex gap-1">
+                <Input
+                  className="w-full"
+                  size="xs"
+                  min={1}
+                  value={height.value}
+                  onChange={({target}) =>
+                    setProp(
+                      (props: ContainerProps) => (props.height.value = +target.value)
+                    )
+                  }
+                />
+                <Input.Select
+                  className="w-24"
+                  size="xs"
+                  value={height.unit}
+                  data={[
+                    {label: "px", value: "px"},
+                    {label: "%", value: "%"},
+                  ]}
+                  onChange={(v) =>
+                    setProp((props: ContainerProps) => (props.height.unit = v as "%"))
+                  }
+                />
+              </div>
+            </Input.Label>
+          </div>
+          <div className="flex-1">
+            <Input.Label title="너비" size="sm" direction="horizontal">
+              <div className="flex gap-1">
+                <Input
+                  className="w-full"
+                  size="xs"
+                  min={1}
+                  value={width.value}
+                  onChange={({target}) =>
+                    setProp(
+                      (props: ContainerProps) => (props.width.value = +target.value)
+                    )
+                  }
+                />
+                <Input.Select
+                  className="w-24"
+                  size="xs"
+                  value={width.unit}
+                  data={[
+                    {label: "px", value: "px"},
+                    {label: "%", value: "%"},
+                  ]}
+                  onChange={(v) =>
+                    setProp((props: ContainerProps) => (props.width.unit = v as "%"))
+                  }
+                />
+              </div>
+            </Input.Label>
+          </div>
+        </div>
+
+        <div className="flex border border-dashed rounded-lg bg-blue-50 items-center justify-center w-[88%] py-6 px-10 relative mb-4 mt-2">
+          <span
+            className="absolute top-1 left-2 text-gray-500 text-[10px]"
+            color="secondary"
+          >
             바깥 여백
-          </Typo.Desc>
+          </span>
+          <div className="h-full w-4 border-r-[1px] border-slate-300 rounded-sm flex justify-center items-center absolute -right-2">
+            <span className="text-[10px] absolute -right-[34px] text-slate-500">{`${height.value}${height.unit}`}</span>
+          </div>
+          <div className="h-4 w-full border-b-[1px] border-slate-300 rounded-sm flex justify-center items-center absolute -bottom-3">
+            <span className="text-[10px] absolute -bottom-4 text-slate-500">{`${width.value}${width.unit}`}</span>
+          </div>
           <Input
             size="xs"
             bordered={false}
@@ -184,9 +247,9 @@ export default function BoxSetting() {
             }}
           />
           <div className="flex border relative items-center justify-center rounded-lg bg-blue-50 border-blue-500 w-full py-7 px-9">
-            <Typo.Desc className="absolute bottom-0.5 right-2" color="secondary">
+            <span className="absolute bottom-0.5 right-2 text-gray-500 text-[10px]">
               안쪽 여백
-            </Typo.Desc>
+            </span>
             <Input
               size="xs"
               bordered={false}
@@ -261,33 +324,6 @@ export default function BoxSetting() {
               }}
             />
             <div className="flex rounded-lg bg-white w-full py-3 px-8" />
-          </div>
-        </div>
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <Input.Label title="최소 높이" size="sm" direction="horizontal">
-              <Input
-                size="sm"
-                min={1}
-                value={minHeight}
-                onChange={({target}) =>
-                  setProp((props: ContainerProps) => (props.minHeight = +target.value))
-                }
-              />
-            </Input.Label>
-          </div>
-          <div className="flex-1">
-            <Input.Label title="최소 너비" size="sm" direction="horizontal">
-              <Input
-                className="w-full"
-                size="sm"
-                min={1}
-                value={minWidth}
-                onChange={({target}) =>
-                  setProp((props: ContainerProps) => (props.minWidth = +target.value))
-                }
-              />
-            </Input.Label>
           </div>
         </div>
       </div>
