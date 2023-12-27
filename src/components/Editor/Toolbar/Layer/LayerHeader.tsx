@@ -5,7 +5,7 @@ import {
   LuChevronRight,
   LuEye,
   LuEyeOff,
-  LuText,
+  LuImage,
   LuType,
   LuUnlink2,
 } from "react-icons/lu";
@@ -28,7 +28,7 @@ export default function LayerHeader() {
   const {hidden, actions, selected, type} = useEditor((state, query) => {
     const selected = query.getEvent("selected").first() === id;
     return {
-      type: state.nodes[id].data.name as "Container" | "Button" | "Text",
+      type: state.nodes[id].data.name as "Container" | "Button" | "Text" | "Image",
       hidden: state.nodes[id] && state.nodes[id].data.hidden,
       selected,
       topLevel: query.node(id).isTopLevelCanvas(),
@@ -46,6 +46,7 @@ export default function LayerHeader() {
         {type === "Text" && <LuType />}
         {type === "Button" && <LuUnlink2 />}
         {type === "Container" && <LuBox />}
+        {type === "Image" && <LuImage />}
       </div>
 
       <div className="inner">

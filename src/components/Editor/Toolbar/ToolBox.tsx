@@ -7,6 +7,7 @@ import Accordion from "@/components/System/Collapse/Accordion";
 import Label from "@/components/System/Input/Label";
 import Input from "@/components/System/Input";
 import LayerRoot from "./Layer/LayerRoot";
+import Image from "../Image";
 
 export default function ToolBox() {
   const {connectors, query} = useEditor();
@@ -35,6 +36,7 @@ export default function ToolBox() {
               <Button.Creator />
               <Text.Creator />
               <Box.Creator />
+              <Image.Creator />
             </div>
           ),
         },

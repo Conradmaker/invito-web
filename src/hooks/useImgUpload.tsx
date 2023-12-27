@@ -2,7 +2,7 @@ import axios from "axios";
 import {v4} from "uuid";
 import dayjs from "dayjs";
 
-export default function useImgUpload() {
+export default function useImgUpload({bucket}: {bucket: string}) {
   const upload = async (file: File) => {
     const ext = file.name.split(".").pop();
     const {data} = await axios.put(
@@ -11,7 +11,7 @@ export default function useImgUpload() {
       {
         params: {
           overwrite: true,
-          path: `/background/${dayjs(new Date()).format("YYYY-MM")}/${v4()}.${
+          path: `/${bucket}/${dayjs(new Date()).format("YYYY-MM")}/${v4()}.${
             ext || "png"
           }`,
         },

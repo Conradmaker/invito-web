@@ -1,12 +1,13 @@
 "use client";
 import Container from "@/components/Editor/Container";
+import Image from "@/components/Editor/Image";
+import EButton from "@/components/Editor/Button";
+import Text from "@/components/Editor/Text";
 import {Editor, Element, Frame} from "@craftjs/core";
 import React, {useState} from "react";
-import Text from "@/components/Editor/Text";
 import ToolBox from "@/components/Editor/Toolbar/ToolBox";
 import Input from "@/components/System/Input";
 import Label from "@/components/System/Input/Label";
-import LayerList from "@/components/Editor/Toolbar/LayerList";
 import Button from "@/components/System/Button";
 import ComponentSetting from "@/components/Editor/Toolbar/ComponentSetting";
 
@@ -19,7 +20,7 @@ export default function page() {
         <span style={{fontFeatureSettings: "ss03"}}>Invito</span>
       </header>
       <div className="flex flex-1">
-        <Editor resolver={{Button, Container, Text}} enabled={editable}>
+        <Editor resolver={{Button: EButton, Container, Text, Image}} enabled={editable}>
           <aside className="w-72 border-r">
             <ToolBox />
           </aside>

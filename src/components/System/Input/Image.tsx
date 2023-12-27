@@ -5,12 +5,18 @@ import useImgUpload from "@/hooks/useImgUpload";
 import {ImgInputBox} from "./styles";
 
 type ImageProps = {
+  bucket?: string;
   multiple?: boolean;
   preview?: boolean;
   onChange?: (url: string) => void;
 };
-export default function Image({multiple = false, preview = true, onChange}: ImageProps) {
-  const {upload} = useImgUpload();
+export default function Image({
+  bucket = "background",
+  multiple = false,
+  preview = true,
+  onChange,
+}: ImageProps) {
+  const {upload} = useImgUpload({bucket});
   const [loading, setLoading] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
   const [previews, setPreviews] = useState("");
