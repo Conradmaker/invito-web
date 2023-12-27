@@ -6,8 +6,7 @@ import {useEditor} from "@craftjs/core";
 import Accordion from "@/components/System/Collapse/Accordion";
 import Label from "@/components/System/Input/Label";
 import Input from "@/components/System/Input";
-import LayerList from "./LayerList";
-import Pop from "@/components/System/Pop";
+import LayerRoot from "./Layer/LayerRoot";
 
 export default function ToolBox() {
   const {connectors, query} = useEditor();
@@ -39,8 +38,8 @@ export default function ToolBox() {
             </div>
           ),
         },
-        {title: "레이어", content: <LayerList />},
+        {title: "레이어", content: <LayerRoot />},
       ]}
-    ></Accordion>
+    />
   );
 }

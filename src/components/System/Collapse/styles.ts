@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as RAccordion from "@radix-ui/react-accordion";
 
 export const AccordionBox = styled(RAccordion.Root)`
-  border-radius: 6px;
+  border-radius: 0px;
   width: 100%;
   background-color: #eee;
   .accordion-item {

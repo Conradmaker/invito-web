@@ -1,5 +1,5 @@
 "use client";
-import Box from "@/components/Editor/Container";
+import Container from "@/components/Editor/Container";
 import {Editor, Element, Frame} from "@craftjs/core";
 import React, {useState} from "react";
 import Text from "@/components/Editor/Text";
@@ -19,7 +19,7 @@ export default function page() {
         <span style={{fontFeatureSettings: "ss03"}}>Invito</span>
       </header>
       <div className="flex flex-1">
-        <Editor resolver={{Button, Box, Text}} enabled={editable}>
+        <Editor resolver={{Button, Container, Text}} enabled={editable}>
           <aside className="w-72 border-r">
             <ToolBox />
           </aside>
@@ -66,7 +66,7 @@ export default function page() {
               <div className="w-96 h-[640px] bg-white border">
                 <Frame>
                   <Element
-                    is={Box}
+                    is={Container}
                     paddingBottom={8}
                     paddingLeft={8}
                     paddingRight={8}
