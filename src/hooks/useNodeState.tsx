@@ -7,7 +7,6 @@ export default function useNodeState() {
     const [currentHoveredId] = state.events.hovered;
     let selected = id === currentSelectedId ? true : false;
     let hovered = id === currentHoveredId ? true : false;
-
     return {
       selected,
       hovered,

@@ -7,6 +7,7 @@ import {CreatorCardBox} from "../Toolbar/styles";
 import Typo from "@/components/System/Typo";
 import {TextContentEditBox, TextSt} from "./styles";
 import {RxMove} from "react-icons/rx";
+import LayerPositioner from "../Toolbar/Layer/LayerPositioner";
 
 export type TextProps = {
   width: {value: number; unit: "px" | "%" | "auto"};
@@ -35,13 +36,7 @@ function Text({text = "텍스트", ...rest}: TextProps) {
       ) : (
         <p dangerouslySetInnerHTML={{__html: text || ""}} />
       )}
-      {selected && (
-        <div className="absolute gap-1 text-xs h-6 left-0 -top-6 bg-blue-600 text-white flex items-center px-2 whitespace-nowrap">
-          <RxMove className="cursor-move" size={12} />{" "}
-          <div className="h-4 w-[1px] bg-slate-400 mx-1" />
-          텍스트
-        </div>
-      )}
+      {selected && <LayerPositioner defaultName="텍스트" editable={false} />}
     </TextSt>
   );
 }
@@ -73,6 +68,7 @@ function TextCreator() {
 
 Text.Creator = TextCreator;
 Text.craft = {
+  displayName: "텍스트",
   related: {
     settings: TextSettings,
   },

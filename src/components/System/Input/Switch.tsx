@@ -8,7 +8,6 @@ export type SwitchProps = {
   onChange?: (v: boolean) => void;
 };
 export default function Switch({size = "sm", onChange, checked}: SwitchProps) {
-  console.log(checked);
   return (
     <SwitchBox size={size} onCheckedChange={onChange} checked={checked}>
       <RSwitch.Thumb className="radix-switch-thumb" />

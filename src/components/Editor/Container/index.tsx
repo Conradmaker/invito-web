@@ -2,12 +2,11 @@
 import {Element, useEditor, useNode} from "@craftjs/core";
 import ContainerSettings from "./Setting";
 import React from "react";
-import {RxMove} from "react-icons/rx";
 import useNodeState from "@/hooks/useNodeState";
 import {CreatorCardBox} from "../Toolbar/styles";
 import Typo from "@/components/System/Typo";
 import {ContainerSt} from "./styles";
-import {LuLink} from "react-icons/lu";
+import LayerPositioner from "../Toolbar/Layer/LayerPositioner";
 
 export type ContainerConfigType = {
   width: {value: number; unit: "px" | "%"};
@@ -47,6 +46,7 @@ export default function Container({children, ...rest}: ContainerProps) {
     connectors: {connect, drag},
   } = useNode();
   const {selected, hovered} = useNodeState();
+
   return (
     <ContainerSt
       {...rest}
@@ -56,22 +56,7 @@ export default function Container({children, ...rest}: ContainerProps) {
     >
       <div>
         {children}
-        {selected && (
-          <div className="absolute gap-1 text-xs h-6 -top-6 bg-blue-600 text-white flex items-center px-2 -left-[1px]">
-            <RxMove className="cursor-move" size={12} />{" "}
-            <div className="h-4 w-[1px] bg-slate-400 mx-1" />
-            컨테이너{" "}
-            {rest.click.link && (
-              <div
-                className="text-xs flex items-center gap-1 ml-2 cursor-pointer"
-                onClick={() => window.open(rest.click.link, "_blank")}
-              >
-                <LuLink size={10} />
-                {rest.click.link.slice(0, 20)}
-              </div>
-            )}
-          </div>
-        )}
+        {selected && <LayerPositioner defaultName="컨테이너" link={rest.click.link} />}
       </div>
     </ContainerSt>
   );
@@ -119,6 +104,7 @@ function ContainerCreator() {
 Container.Creator = ContainerCreator;
 
 Container.craft = {
+  displayName: "컨테이너",
   related: {
     settings: ContainerSettings,
   },

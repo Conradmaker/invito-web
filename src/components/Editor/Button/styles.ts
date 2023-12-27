@@ -1,8 +1,11 @@
 import styled, {css} from "styled-components";
 import {ButtonProps} from ".";
 
-export const ButtonStyle = styled.button<ButtonProps>`
-  border: 1px solid #ccc;
+type ButtonStyleProps = {
+  $hovered: boolean;
+  $selected: boolean;
+} & ButtonProps;
+export const ButtonStyle = styled.button<ButtonStyleProps>`
   border-radius: 4px;
   color: #333;
   cursor: pointer;
@@ -10,9 +13,18 @@ export const ButtonStyle = styled.button<ButtonProps>`
   font-weight: 500;
   line-height: 32px;
   text-align: center;
-  transition: all 0.25s ease-in-out;
+  transition: color, background-color, border-radius 0.25s ease-in-out;
   line-height: 1.5;
-
+  position: relative;
+  border-width: 1px;
+  border-style: ${({$selected, $hovered}) =>
+    $selected ? "solid" : $hovered ? "dashed" : "solid"};
+  border-color: ${({$selected, $hovered, theme, color}) =>
+    $selected
+      ? theme.colors.primary[400]
+      : $hovered
+      ? theme.colors.primary[300]
+      : color.background};
   &:disabled {
     background-color: #ccc;
     border-color: #ccc;

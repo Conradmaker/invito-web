@@ -17,10 +17,10 @@ export const ContainerSt = styled.div<ContainerStProps>`
     border-style: ${({$selected}) => ($selected ? "solid" : "dashed")};
     border-color: ${({$selected, $hovered, theme}) =>
       $selected
-        ? theme.colors.primary[300]
+        ? theme.colors.primary[400]
         : $hovered
-        ? theme.colors.primary[200]
-        : "#eee"};
+        ? theme.colors.primary[300]
+        : theme.colors.primary[100]};
     flex: 1;
     display: flex;
     align-items: flex-start;

@@ -24,3 +24,16 @@ export const CreatorCardBox = styled.div`
     }
   }
 `;
+
+export const LayerContainer = styled.div`
+  height: 100%;
+  div[depth="1"] {
+    padding-left: 24px !important;
+  }
+  div[depth="2"] {
+    padding-left: 48px !important;
+  }
+  div[depth="3"] {
+    padding-left: 72px;
+  }
+`;
