@@ -10,18 +10,18 @@ import {TextContentEditBox} from "../Text/styles";
 import LayerPositioner from "../Toolbar/Layer/LayerPositioner";
 
 export type ButtonConfigProps = {
-  size?: "xs" | "sm" | "lg" | "md";
-  block?: boolean;
-  text?: string;
-  color: {background: string; text: string};
-  shape: "round" | "square";
-  click: {
+  $size?: "xs" | "sm" | "lg" | "md";
+  $block?: boolean;
+  $text?: string;
+  $color: {background: string; text: string};
+  $shape: "round" | "square";
+  $click: {
     type: "none" | "link" | "modal";
     link?: string;
   };
 };
 export type ButtonProps = {} & ButtonConfigProps;
-function Button({text = "버튼", ...rest}: ButtonProps) {
+function Button({$text = "버튼", ...rest}: ButtonProps) {
   const {
     connectors: {connect, drag},
     actions: {setProp},
@@ -37,19 +37,19 @@ function Button({text = "버튼", ...rest}: ButtonProps) {
     >
       {selected ? (
         <TextContentEditBox
-          html={text}
+          html={$text}
           onChange={(e) =>
             setProp(
               (props: ButtonProps) =>
-                (props.text = e.target.value.replace(/<\/?[^>]+(>|$)/g, ""))
+                (props.$text = e.target.value.replace(/<\/?[^>]+(>|$)/g, ""))
             )
           }
           tagName="p"
         />
       ) : (
-        text
+        $text
       )}
-      {selected && <LayerPositioner link={rest.click.link} defaultName="버튼" />}
+      {selected && <LayerPositioner link={rest.$click.link} defaultName="버튼" />}
     </ButtonStyle>
   );
 }
@@ -61,12 +61,12 @@ function ButtonCreator() {
         connectors.create(
           ref,
           <Button
-            shape="square"
-            color={{background: "#4945FF", text: "#ffffff"}}
-            click={{type: "none"}}
-            size="sm"
-            block={false}
-            text="버튼"
+            $shape="square"
+            $color={{background: "#4945FF", text: "#ffffff"}}
+            $click={{type: "none"}}
+            $size="sm"
+            $block={false}
+            $text="버튼"
           />
         )
       }

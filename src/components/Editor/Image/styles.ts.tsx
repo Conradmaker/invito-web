@@ -8,12 +8,11 @@ type ImageStyleProps = {
 export const ImageSt = styled.div<ImageStyleProps>`
   position: relative;
   ${(props) => css`
-    width: ${props.width.value}${props.width.unit};
-    height: ${props.height.value}${props.height.unit};
+    width: ${props.$width.value}${props.$width.unit};
+    height: ${props.$height.value}${props.$height.unit};
   `};
   max-width: 100%;
   max-height: 100%;
-  border-radius: ${({radius}) => `${radius}px`};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,18 +26,19 @@ export const ImageSt = styled.div<ImageStyleProps>`
       ? theme.colors.primary[300]
       : "transparent"};
   .img-positioner {
+    border-radius: ${({$radius}) => `${$radius}px`};
     flex: 1;
     width: 100%;
     overflow: hidden;
     img {
       width: 100%;
       height: 100%;
-      object-fit: ${({fit}) => fit};
+      object-fit: ${({$fit}) => $fit};
     }
   }
   .caption {
     width: 100%;
     white-space: nowrap;
-    text-align: ${({caption}) => caption.placement?.split("-")[1] || "right"};
+    text-align: ${({$caption}) => $caption.placement?.split("-")[1] || "right"};
   }
 `;

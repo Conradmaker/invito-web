@@ -9,20 +9,20 @@ export const TextSt = styled.span<TextProps>`
   ${(props) => css`
     & > p {
       max-width: 100%;
-      font-size: ${props.size}px;
-      font-weight: ${props.weight || 400};
-      color: ${props.color || "#000"};
-      text-align: ${props.align || "left"};
-      font-family: ${props.font}, "Wanted Sans Variable", "Wanted Sans", sans-serif;
+      font-size: ${props.$size}px;
+      font-weight: ${props.$weight || 400};
+      color: ${props.$color || "#000"};
+      text-align: ${props.$align || "left"};
+      font-family: ${props.$font}, "Wanted Sans Variable", "Wanted Sans", sans-serif;
       line-break: anywhere;
     }
   `}
-  ${({width}) =>
-    width.unit !== "auto" &&
+  ${({$width}) =>
+    $width.unit !== "auto" &&
     css`
       max-width: 100%;
       display: inline-block;
-      width: ${width.value}${width.unit};
+      width: ${$width.value}${$width.unit};
     `}
 `;
 

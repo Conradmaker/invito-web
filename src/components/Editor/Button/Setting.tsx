@@ -7,15 +7,14 @@ import {LuCircle, LuLink, LuSquare} from "react-icons/lu";
 
 export default function ButtonSetting() {
   const {
-    text,
-    click,
-    size,
-    color,
-    block,
-    shape,
+    $text,
+    $click,
+    $size,
+    $color,
+    $block,
+    $shape,
     actions: {setProp},
   } = useNode<ButtonProps>((node) => node.data.props as ButtonProps);
-  console.log(block);
   return (
     <div className="flex flex-col gap-8 items-start p-4 h-[calc(100vh-48px)] overflow-y-scroll">
       <div className="flex flex-col gap-2 w-full">
@@ -25,10 +24,10 @@ export default function ButtonSetting() {
         <Input.Label title="텍스트" size="sm">
           <Input
             block
-            value={text}
+            value={$text}
             onChange={(e) =>
               setProp((props: ButtonProps) => {
-                props.text = e.target.value;
+                props.$text = e.target.value;
               })
             }
           />
@@ -54,10 +53,10 @@ export default function ButtonSetting() {
           <Input.Toggle.Group
             block
             size="sm"
-            value={shape}
+            value={$shape}
             onChange={(value) => {
               setProp((props: ButtonProps) => {
-                props.shape = value as "round" | "square";
+                props.$shape = value as "round" | "square";
               });
             }}
             data={[
@@ -68,10 +67,10 @@ export default function ButtonSetting() {
         </Input.Label>
         <Input.Label title="크기" direction="horizontal" size="sm">
           <Input.Select
-            value={size}
+            value={$size}
             onChange={(value) =>
               setProp((props: ButtonProps) => {
-                props.size = value as "xs" | "sm" | "md" | "lg";
+                props.$size = value as "xs" | "sm" | "md" | "lg";
               })
             }
             block
@@ -87,18 +86,18 @@ export default function ButtonSetting() {
         <Input.Label title="전체 너비" direction="horizontal" size="sm">
           <Input.Switch
             size="sm"
-            checked={block}
-            onChange={(c) => setProp((prop: ButtonProps) => (prop.block = c))}
+            checked={$block}
+            onChange={(c) => setProp((prop: ButtonProps) => (prop.$block = c))}
           />
         </Input.Label>
         <Input.Label title="배경색" size="sm" direction="horizontal">
           <Input.Color
             size="sm"
-            value={color.background || "#4945FF"}
+            value={$color.background || "#4945FF"}
             onChange={(value) => {
               setProp((props: ButtonProps) => {
-                props.color = {
-                  ...props.color,
+                props.$color = {
+                  ...props.$color,
                   background: value,
                 };
               });
@@ -108,11 +107,11 @@ export default function ButtonSetting() {
         <Input.Label title="글씨색" size="sm" direction="horizontal">
           <Input.Color
             size="sm"
-            value={color.text || "#ffffff"}
+            value={$color.text || "#ffffff"}
             onChange={(value) => {
               setProp((props: ButtonProps) => {
-                props.color = {
-                  ...props.color,
+                props.$color = {
+                  ...props.$color,
                   text: value,
                 };
               });
@@ -127,11 +126,11 @@ export default function ButtonSetting() {
           <Input.Select
             block
             size="sm"
-            value={click.type}
+            value={$click.type}
             onChange={(value) => {
               setProp((props: ButtonProps) => {
-                props.click = {
-                  ...props.click,
+                props.$click = {
+                  ...props.$click,
                   type: value as "none" | "link",
                 };
               });
@@ -142,19 +141,19 @@ export default function ButtonSetting() {
             ]}
           />
         </Input.Label>
-        {click.type === "link" && (
+        {$click.type === "link" && (
           <Input.Label title="링크" size="sm" direction="horizontal">
             <Input
               size="sm"
               onChange={(e) => {
                 setProp((props: ButtonProps) => {
-                  props.click = {
-                    ...props.click,
+                  props.$click = {
+                    ...props.$click,
                     link: e.target.value.trim(),
                   };
                 });
               }}
-              value={click.link}
+              value={$click.link}
               placeholder="https://"
               prefix={<LuLink />}
             />

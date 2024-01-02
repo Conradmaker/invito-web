@@ -19,12 +19,12 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   border-width: 1px;
   border-style: ${({$selected, $hovered}) =>
     $selected ? "solid" : $hovered ? "dashed" : "solid"};
-  border-color: ${({$selected, $hovered, theme, color}) =>
+  border-color: ${({$selected, $hovered, theme, $color}) =>
     $selected
       ? theme.colors.primary[400]
       : $hovered
       ? theme.colors.primary[300]
-      : color.background};
+      : $color.background};
   &:disabled {
     background-color: #ccc;
     border-color: #ccc;
@@ -33,25 +33,25 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   }
 
   ${(props) => css`
-    background-color: ${props.color.background};
-    color: ${props.color.text};
+    background-color: ${props.$color.background};
+    color: ${props.$color.text};
   `}
-  ${({block}) =>
-    block &&
+  ${({$block}) =>
+    $block &&
     css`
       display: block;
       width: 100%;
     `}
 
-  ${({shape}) =>
-    shape === "round" &&
+  ${({$shape}) =>
+    $shape === "round" &&
     css`
       border-radius: 50px;
     `}
 
 
-  ${({size}) => {
-    switch (size) {
+  ${({$size}) => {
+    switch ($size) {
       case "xs":
         return css`
           padding: 6.5px 10px;

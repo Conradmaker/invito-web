@@ -19,22 +19,22 @@ import Typo from "@/components/System/Typo";
 
 export default function BoxSetting() {
   const {
-    height,
-    width,
-    justify,
-    align,
-    direction,
-    gap,
-    paddingLeft,
-    paddingBottom,
-    paddingRight,
-    paddingTop,
-    marginLeft,
-    marginBottom,
-    marginRight,
-    marginTop,
-    background,
-    click,
+    $height,
+    $width,
+    $justify,
+    $align,
+    $direction,
+    $gap,
+    $paddingLeft,
+    $paddingBottom,
+    $paddingRight,
+    $paddingTop,
+    $marginLeft,
+    $marginBottom,
+    $marginRight,
+    $marginTop,
+    $background,
+    $click,
     actions: {setProp},
   } = useNode<ContainerProps>((node) => node.data.props as ContainerProps);
   return (
@@ -48,9 +48,9 @@ export default function BoxSetting() {
             <Input.Toggle.Group
               block
               size="sm"
-              value={direction || "row"}
+              value={$direction || "row"}
               onChange={(v) =>
-                setProp((props: ContainerProps) => (props.direction = v as "row"))
+                setProp((props: ContainerProps) => (props.$direction = v as "row"))
               }
               data={[
                 {icon: <LuGalleryVerticalEnd />, value: "column", text: "세로 방향"},
@@ -62,9 +62,9 @@ export default function BoxSetting() {
             <Input.Toggle.Group
               block
               size="xs"
-              value={justify || "start"}
+              value={$justify || "start"}
               onChange={(v) =>
-                setProp((props: ContainerProps) => (props.justify = v as "start"))
+                setProp((props: ContainerProps) => (props.$justify = v as "start"))
               }
               data={[
                 {icon: <LuAlignStartVertical />, value: "start"},
@@ -78,9 +78,9 @@ export default function BoxSetting() {
             <Input.Toggle.Group
               block
               size="xs"
-              value={align || "start"}
+              value={$align || "start"}
               onChange={(v) =>
-                setProp((props: ContainerProps) => (props.align = v as "start"))
+                setProp((props: ContainerProps) => (props.$align = v as "start"))
               }
               data={[
                 {icon: <LuAlignStartHorizontal />, value: "start"},
@@ -94,8 +94,8 @@ export default function BoxSetting() {
             <Input.Slider
               block
               size="sm"
-              value={gap ? [gap] : [0]}
-              onChange={(v) => setProp((props: ContainerProps) => (props.gap = v[0]))}
+              value={$gap ? [$gap] : [0]}
+              onChange={(v) => setProp((props: ContainerProps) => (props.$gap = v[0]))}
             />
           </Input.Label>
         </div>
@@ -108,23 +108,23 @@ export default function BoxSetting() {
                   className="w-full"
                   size="xs"
                   min={1}
-                  value={height.value}
+                  value={$height.value}
                   onChange={({target}) =>
                     setProp(
-                      (props: ContainerProps) => (props.height.value = +target.value)
+                      (props: ContainerProps) => (props.$height.value = +target.value)
                     )
                   }
                 />
                 <Input.Select
                   className="w-24"
                   size="xs"
-                  value={height.unit}
+                  value={$height.unit}
                   data={[
                     {label: "px", value: "px"},
                     {label: "%", value: "%"},
                   ]}
                   onChange={(v) =>
-                    setProp((props: ContainerProps) => (props.height.unit = v as "%"))
+                    setProp((props: ContainerProps) => (props.$height.unit = v as "%"))
                   }
                 />
               </div>
@@ -137,23 +137,23 @@ export default function BoxSetting() {
                   className="w-full"
                   size="xs"
                   min={1}
-                  value={width.value}
+                  value={$width.value}
                   onChange={({target}) =>
                     setProp(
-                      (props: ContainerProps) => (props.width.value = +target.value)
+                      (props: ContainerProps) => (props.$width.value = +target.value)
                     )
                   }
                 />
                 <Input.Select
                   className="w-24"
                   size="xs"
-                  value={width.unit}
+                  value={$width.unit}
                   data={[
                     {label: "px", value: "px"},
                     {label: "%", value: "%"},
                   ]}
                   onChange={(v) =>
-                    setProp((props: ContainerProps) => (props.width.unit = v as "%"))
+                    setProp((props: ContainerProps) => (props.$width.unit = v as "%"))
                   }
                 />
               </div>
@@ -169,10 +169,10 @@ export default function BoxSetting() {
             바깥 여백
           </span>
           <div className="h-full w-4 border-r-[1px] border-slate-300 rounded-sm flex justify-center items-center absolute -right-2">
-            <span className="text-[10px] absolute -right-[34px] text-slate-500">{`${height.value}${height.unit}`}</span>
+            <span className="text-[10px] absolute -right-[34px] text-slate-500">{`${$height.value}${$height.unit}`}</span>
           </div>
           <div className="h-4 w-full border-b-[1px] border-slate-300 rounded-sm flex justify-center items-center absolute -bottom-3">
-            <span className="text-[10px] absolute -bottom-4 text-slate-500">{`${width.value}${width.unit}`}</span>
+            <span className="text-[10px] absolute -bottom-4 text-slate-500">{`${$width.value}${$width.unit}`}</span>
           </div>
           <Input
             size="xs"
@@ -182,13 +182,13 @@ export default function BoxSetting() {
             min={0}
             max={140}
             textAlign="center"
-            value={marginTop}
+            value={$marginTop}
             type="number"
             onChange={({target}) => {
               if (+target.value > 140) return;
               setProp(
                 (props: ContainerProps) =>
-                  (props.marginTop = Number(target.value.replace(/(^0+)/, "")))
+                  (props.$marginTop = Number(target.value.replace(/(^0+)/, "")))
               );
             }}
           />
@@ -200,13 +200,13 @@ export default function BoxSetting() {
             min={0}
             max={140}
             textAlign="center"
-            value={marginRight}
+            value={$marginRight}
             type="number"
             onChange={({target}) => {
               if (+target.value > 140) return;
               setProp(
                 (props: ContainerProps) =>
-                  (props.marginRight = Number(target.value.replace(/(^0+)/, "")))
+                  (props.$marginRight = Number(target.value.replace(/(^0+)/, "")))
               );
             }}
           />
@@ -218,13 +218,13 @@ export default function BoxSetting() {
             min={0}
             max={140}
             textAlign="center"
-            value={marginBottom}
+            value={$marginBottom}
             type="number"
             onChange={({target}) => {
               if (+target.value > 140) return;
               setProp(
                 (props: ContainerProps) =>
-                  (props.marginBottom = Number(target.value.replace(/(^0+)/, "")))
+                  (props.$marginBottom = Number(target.value.replace(/(^0+)/, "")))
               );
             }}
           />
@@ -236,13 +236,13 @@ export default function BoxSetting() {
             min={0}
             max={140}
             textAlign="center"
-            value={marginLeft}
+            value={$marginLeft}
             type="number"
             onChange={({target}) => {
               if (+target.value > 140) return;
               setProp(
                 (props: ContainerProps) =>
-                  (props.marginLeft = Number(target.value.replace(/(^0+)/, "")))
+                  (props.$marginLeft = Number(target.value.replace(/(^0+)/, "")))
               );
             }}
           />
@@ -258,13 +258,13 @@ export default function BoxSetting() {
               min={0}
               max={140}
               textAlign="center"
-              value={paddingTop}
+              value={$paddingTop}
               type="number"
               onChange={({target}) => {
                 if (+target.value > 140) return;
                 setProp(
                   (props: ContainerProps) =>
-                    (props.paddingTop = Number(target.value.replace(/(^0+)/, "")))
+                    (props.$paddingTop = Number(target.value.replace(/(^0+)/, "")))
                 );
               }}
             />
@@ -276,13 +276,13 @@ export default function BoxSetting() {
               width={40}
               min={0}
               max={140}
-              value={paddingRight}
+              value={$paddingRight}
               type="number"
               onChange={({target}) => {
                 if (+target.value > 140) return;
                 setProp(
                   (props: ContainerProps) =>
-                    (props.paddingRight = +target.value.replace(/(^0+)/, ""))
+                    (props.$paddingRight = +target.value.replace(/(^0+)/, ""))
                 );
               }}
             />
@@ -294,13 +294,13 @@ export default function BoxSetting() {
               width={40}
               min={0}
               max={140}
-              value={paddingBottom}
+              value={$paddingBottom}
               type="number"
               onChange={({target}) => {
                 if (+target.value > 140) return;
                 setProp(
                   (props: ContainerProps) =>
-                    (props.paddingBottom = +target.value.replace(/(^0+)/, ""))
+                    (props.$paddingBottom = +target.value.replace(/(^0+)/, ""))
                 );
               }}
             />
@@ -313,13 +313,13 @@ export default function BoxSetting() {
               min={0}
               max={140}
               maxLength={3}
-              value={paddingLeft}
+              value={$paddingLeft}
               type="number"
               onChange={({target}) => {
                 if (+target.value > 140) return;
                 setProp(
                   (props: ContainerProps) =>
-                    (props.paddingLeft = +target.value.replace(/(^0+)/, ""))
+                    (props.$paddingLeft = +target.value.replace(/(^0+)/, ""))
                 );
               }}
             />
@@ -334,11 +334,11 @@ export default function BoxSetting() {
             block
             placeholder="배경"
             size="sm"
-            value={background.type || "transparent"}
+            value={$background.type || "transparent"}
             onChange={(value) => {
               setProp((props: ContainerProps) => {
-                props.background = {
-                  ...props.background,
+                props.$background = {
+                  ...props.$background,
                   type: value as "transparent" | "color" | "image",
                 };
               });
@@ -350,15 +350,15 @@ export default function BoxSetting() {
             ]}
           />
         </Input.Label>
-        {background?.type === "color" && (
+        {$background?.type === "color" && (
           <Input.Label title="색상" size="sm" direction="horizontal">
             <Input.Color
               size="sm"
-              value={background.color || "#ffffff"}
+              value={$background.color || "#ffffff"}
               onChange={(value) => {
                 setProp((props: ContainerProps) => {
-                  props.background = {
-                    ...props.background,
+                  props.$background = {
+                    ...props.$background,
                     color: value,
                   };
                 });
@@ -367,13 +367,13 @@ export default function BoxSetting() {
           </Input.Label>
         )}
 
-        {background?.type === "image" && (
+        {$background?.type === "image" && (
           <>
             <Input.Image
               onChange={(url) =>
                 setProp((props: ContainerProps) => {
-                  props.background = {
-                    ...props.background,
+                  props.$background = {
+                    ...props.$background,
                     src: url,
                   };
                 })
@@ -381,19 +381,19 @@ export default function BoxSetting() {
             />
           </>
         )}
-        {background.type === "image" && background?.src && (
+        {$background.type === "image" && $background?.src && (
           <Input.Label title="효과" size="sm" direction="horizontal">
             <div className="flex flex-row gap-2">
               <Input.Select
                 block
                 size="sm"
-                value={background?.filter?.type || "none"}
+                value={$background?.filter?.type || "none"}
                 onChange={(value) => {
                   setProp((props: ContainerProps) => {
-                    props.background = {
-                      ...props.background,
+                    props.$background = {
+                      ...props.$background,
                       filter: {
-                        ...props.background.filter,
+                        ...props.$background.filter,
                         type: value as "none",
                         value: 60,
                       },
@@ -408,17 +408,17 @@ export default function BoxSetting() {
                   {label: "흑백", value: "grayscale"},
                 ]}
               />
-              {background?.filter?.type !== "none" && (
+              {$background?.filter?.type !== "none" && (
                 <Input.Select
                   size="sm"
                   value={
-                    background?.filter?.value ? background?.filter?.value + "" : "60"
+                    $background?.filter?.value ? $background?.filter?.value + "" : "60"
                   }
                   onChange={(value) => {
                     setProp((props: ContainerProps) => {
-                      props.background = {
-                        ...props.background,
-                        filter: {...props.background.filter, value: +value},
+                      props.$background = {
+                        ...props.$background,
+                        filter: {...props.$background.filter, value: +value},
                       };
                     });
                   }}
@@ -434,7 +434,7 @@ export default function BoxSetting() {
             </div>
           </Input.Label>
         )}
-        {background.type === "image" && background?.src && (
+        {$background.type === "image" && $background?.src && (
           <Input.Label direction="horizontal" title="블러" size="sm">
             <Input.Slider
               size="sm"
@@ -442,12 +442,12 @@ export default function BoxSetting() {
               max={20}
               step={1}
               block
-              value={background?.filter?.blur ? [background?.filter?.blur] : [0]}
+              value={$background?.filter?.blur ? [$background?.filter?.blur] : [0]}
               onChange={(value) => {
                 setProp((props: ContainerProps) => {
-                  props.background = {
-                    ...props.background,
-                    filter: {...props.background.filter, blur: value[0]},
+                  props.$background = {
+                    ...props.$background,
+                    filter: {...props.$background.filter, blur: value[0]},
                   };
                 });
               }}
@@ -462,11 +462,11 @@ export default function BoxSetting() {
           <Input.Select
             block
             size="sm"
-            value={click.type}
+            value={$click.type}
             onChange={(value) => {
               setProp((props: ContainerProps) => {
-                props.click = {
-                  ...props.click,
+                props.$click = {
+                  ...props.$click,
                   type: value as "none" | "link",
                 };
               });
@@ -477,19 +477,19 @@ export default function BoxSetting() {
             ]}
           />
         </Input.Label>
-        {click.type === "link" && (
+        {$click.type === "link" && (
           <Input.Label title="링크" size="sm" direction="horizontal">
             <Input
               size="sm"
               onChange={(e) => {
                 setProp((props: ContainerProps) => {
-                  props.click = {
-                    ...props.click,
+                  props.$click = {
+                    ...props.$click,
                     link: e.target.value.trim(),
                   };
                 });
               }}
-              value={click.link}
+              value={$click.link}
               placeholder="https://"
               prefix={<LuLink />}
             />

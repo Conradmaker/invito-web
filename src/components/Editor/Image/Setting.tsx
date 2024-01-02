@@ -16,13 +16,13 @@ import {
 
 export default function ImageSettings() {
   const {
-    height,
-    width,
-    radius,
-    fit,
-    caption,
-    src,
-    click,
+    $height,
+    $width,
+    $radius,
+    $fit,
+    $caption,
+    $src,
+    $click,
     actions: {setProp},
   } = useNode<ImageProps>((node) => node.data.props as ImageProps);
   return (
@@ -36,9 +36,9 @@ export default function ImageSettings() {
             <Input.Toggle.Group
               block
               size="sm"
-              value={radius === 9999 ? "round" : "square"}
+              value={$radius === 9999 ? "round" : "square"}
               onChange={(v) =>
-                setProp((props: ImageProps) => (props.radius = v === "round" ? 9999 : 0))
+                setProp((props: ImageProps) => (props.$radius = v === "round" ? 9999 : 0))
               }
               data={[
                 {icon: <LuCircle />, value: "round", text: "원형"},
@@ -46,7 +46,7 @@ export default function ImageSettings() {
               ]}
             />
           </Input.Label>
-          {radius !== 9999 && (
+          {$radius !== 9999 && (
             <Input.Label title="모서리" size="sm" direction="horizontal">
               <Input.Slider
                 block
@@ -54,8 +54,8 @@ export default function ImageSettings() {
                 min={0}
                 step={1}
                 max={50}
-                value={radius ? [radius] : [0]}
-                onChange={(v) => setProp((props: ImageProps) => (props.radius = v[0]))}
+                value={$radius ? [$radius] : [0]}
+                onChange={(v) => setProp((props: ImageProps) => (props.$radius = v[0]))}
               />
             </Input.Label>
           )}
@@ -67,14 +67,14 @@ export default function ImageSettings() {
           </Typo.Body>
           <Input.Image
             bucket="imgBlock"
-            onChange={(url) => setProp((props: ImageProps) => (props.src = url))}
+            onChange={(url) => setProp((props: ImageProps) => (props.$src = url))}
           />
           <Input.Label title="캡션" size="sm" direction="horizontal">
             <Input
               size="xs"
-              value={caption.text}
+              value={$caption.text}
               onChange={(e) =>
-                setProp((props: ImageProps) => (props.caption.text = e.target.value))
+                setProp((props: ImageProps) => (props.$caption.text = e.target.value))
               }
             />
           </Input.Label>
@@ -86,21 +86,21 @@ export default function ImageSettings() {
                 {icon: <LuEye />, text: "표시", value: "visible"},
                 {icon: <LuEyeOff />, text: "숨기기", value: "hidden"},
               ]}
-              value={caption.visible ? "visible" : "hidden"}
+              value={$caption.visible ? "visible" : "hidden"}
               onChange={(e) =>
                 setProp((props: ImageProps) => {
                   if (e === "visible") {
-                    props.caption.visible = true;
-                    props.caption.placement = "bottom-right";
+                    props.$caption.visible = true;
+                    props.$caption.placement = "bottom-right";
                   } else {
-                    props.caption.visible = false;
-                    props.caption.placement = null;
+                    props.$caption.visible = false;
+                    props.$caption.placement = null;
                   }
                 })
               }
             />
           </Input.Label>
-          {caption.visible && (
+          {$caption.visible && (
             <Input.Label title="캡션위치" size="sm" direction="horizontal">
               <Input.Toggle.Group
                 block
@@ -110,10 +110,10 @@ export default function ImageSettings() {
                   {icon: <LuArrowDown />, text: "중앙", value: "bottom-center"},
                   {icon: <LuArrowDownRight />, text: "오른쪽", value: "bottom-right"},
                 ]}
-                value={caption.placement || "bottom-right"}
+                value={$caption.placement || "bottom-right"}
                 onChange={(e) =>
                   setProp((props: ImageProps) => {
-                    props.caption.placement = e as ImageProps["caption"]["placement"];
+                    props.$caption.placement = e as ImageProps["$caption"]["placement"];
                   })
                 }
               />
@@ -132,21 +132,21 @@ export default function ImageSettings() {
                   className="w-full"
                   size="xs"
                   min={1}
-                  value={height.value}
+                  value={$height.value}
                   onChange={({target}) =>
-                    setProp((props: ImageProps) => (props.height.value = +target.value))
+                    setProp((props: ImageProps) => (props.$height.value = +target.value))
                   }
                 />
                 <Input.Select
                   className="w-24"
                   size="xs"
-                  value={height.unit}
+                  value={$height.unit}
                   data={[
                     {label: "px", value: "px"},
                     {label: "%", value: "%"},
                   ]}
                   onChange={(v) =>
-                    setProp((props: ImageProps) => (props.height.unit = v as "%"))
+                    setProp((props: ImageProps) => (props.$height.unit = v as "%"))
                   }
                 />
               </div>
@@ -159,21 +159,21 @@ export default function ImageSettings() {
                   className="w-full"
                   size="xs"
                   min={1}
-                  value={width.value}
+                  value={$width.value}
                   onChange={({target}) =>
-                    setProp((props: ImageProps) => (props.width.value = +target.value))
+                    setProp((props: ImageProps) => (props.$width.value = +target.value))
                   }
                 />
                 <Input.Select
                   className="w-24"
                   size="xs"
-                  value={width.unit}
+                  value={$width.unit}
                   data={[
                     {label: "px", value: "px"},
                     {label: "%", value: "%"},
                   ]}
                   onChange={(v) =>
-                    setProp((props: ImageProps) => (props.width.unit = v as "%"))
+                    setProp((props: ImageProps) => (props.$width.unit = v as "%"))
                   }
                 />
               </div>
@@ -184,14 +184,14 @@ export default function ImageSettings() {
               <Input.Select
                 className="w-24"
                 size="xs"
-                value={fit}
+                value={$fit}
                 data={[
                   {label: "자르기", value: "cover"},
                   {label: "비율유지", value: "contain"},
                   {label: "채우기", value: "stretch"},
                 ]}
                 onChange={(v) =>
-                  setProp((props: ImageProps) => (props.fit = v as "cover"))
+                  setProp((props: ImageProps) => (props.$fit = v as "cover"))
                 }
               />
             </Input.Label>
@@ -205,11 +205,11 @@ export default function ImageSettings() {
             <Input.Select
               block
               size="sm"
-              value={click.type}
+              value={$click.type}
               onChange={(value) => {
                 setProp((props: ImageProps) => {
-                  props.click = {
-                    ...props.click,
+                  props.$click = {
+                    ...props.$click,
                     type: value as "none" | "link",
                   };
                 });
@@ -220,19 +220,19 @@ export default function ImageSettings() {
               ]}
             />
           </Input.Label>
-          {click.type === "link" && (
+          {$click.type === "link" && (
             <Input.Label title="링크" size="sm" direction="horizontal">
               <Input
                 size="sm"
                 onChange={(e) => {
                   setProp((props: ImageProps) => {
-                    props.click = {
-                      ...props.click,
+                    props.$click = {
+                      ...props.$click,
                       link: e.target.value.trim(),
                     };
                   });
                 }}
-                value={click.link}
+                value={$click.link}
                 placeholder="https://"
                 prefix={<LuLink />}
               />

@@ -68,15 +68,15 @@ export default function page() {
                 <Frame>
                   <Element
                     is={Container}
-                    paddingBottom={8}
-                    paddingLeft={8}
-                    paddingRight={8}
-                    paddingTop={8}
-                    direction="column"
-                    background={{type: "transparent", filter: {type: "none", blur: 0}}}
-                    height={{value: 100, unit: "%"}}
-                    width={{value: 100, unit: "%"}}
-                    click={{type: "none"}}
+                    $paddingBottom={8}
+                    $paddingLeft={8}
+                    $paddingRight={8}
+                    $paddingTop={8}
+                    $direction="column"
+                    $background={{type: "transparent", filter: {type: "none", blur: 0}}}
+                    $height={{value: 100, unit: "%"}}
+                    $width={{value: 100, unit: "%"}}
+                    $click={{type: "none"}}
                     canvas
                   ></Element>
                 </Frame>

@@ -8,13 +8,13 @@ import FontSelector, {fontVars, fontWeightVars} from "./FontSelector";
 
 export default function TextSetting() {
   const {
-    text,
-    width,
-    weight,
-    size,
-    align,
-    color,
-    font,
+    $text,
+    $width,
+    $weight,
+    $size,
+    $align,
+    $color,
+    $font,
     actions: {setProp},
   } = useNode<TextProps>((node) => node.data.props as TextProps);
   return (
@@ -26,11 +26,11 @@ export default function TextSetting() {
         <Input.Label title="폰트" size="sm">
           <FontSelector
             block
-            value={font}
+            value={$font}
             onChange={(v) =>
               setProp((prop: TextProps) => {
-                prop.font = v;
-                prop.weight = "400";
+                prop.$font = v;
+                prop.$weight = "400";
               })
             }
           />
@@ -39,10 +39,10 @@ export default function TextSetting() {
           <Input.Label title="사이즈" size="sm">
             <Input
               block
-              value={size}
+              value={$size}
               onChange={(e) =>
                 setProp((prop: TextProps) => {
-                  prop.size = +e.target.value;
+                  prop.$size = +e.target.value;
                 })
               }
               type="number"
@@ -51,14 +51,14 @@ export default function TextSetting() {
           <Input.Label title="굵기" size="sm">
             <Input.Select
               block
-              value={weight}
+              value={$weight}
               onChange={(value) =>
                 setProp((props: TextProps) => {
-                  props.weight = value as "300" | "400" | "500" | "700";
+                  props.$weight = value as "300" | "400" | "500" | "700";
                 })
               }
               data={fontWeightVars.filter((fw) =>
-                fontVars.find((f) => f.value === font)?.weights.includes(+fw.value)
+                fontVars.find((f) => f.value === $font)?.weights.includes(+fw.value)
               )}
             />
           </Input.Label>
@@ -67,8 +67,8 @@ export default function TextSetting() {
           <Input.Toggle.Group
             block
             size="sm"
-            value={align || "left"}
-            onChange={(v) => setProp((props: TextProps) => (props.align = v as "left"))}
+            value={$align || "left"}
+            onChange={(v) => setProp((props: TextProps) => (props.$align = v as "left"))}
             data={[
               {icon: <LuAlignLeft />, value: "left"},
               {icon: <LuAlignCenter />, value: "center"},
@@ -80,8 +80,8 @@ export default function TextSetting() {
         <Input.Label title="글씨색" size="sm">
           <Input.Color
             size="sm"
-            value={color || "#000000"}
-            onChange={(v) => setProp((props: TextProps) => (props.color = v))}
+            value={$color || "#000000"}
+            onChange={(v) => setProp((props: TextProps) => (props.$color = v))}
           />
         </Input.Label>
       </div>
@@ -92,22 +92,22 @@ export default function TextSetting() {
               className="w-full"
               size="xs"
               min={1}
-              value={width.value}
+              value={$width.value}
               onChange={({target}) =>
-                setProp((props: TextProps) => (props.width.value = +target.value))
+                setProp((props: TextProps) => (props.$width.value = +target.value))
               }
             />
             <Input.Select
               className="w-24"
               size="xs"
-              value={width.unit}
+              value={$width.unit}
               data={[
                 {label: "자동", value: "auto"},
                 {label: "px", value: "px"},
                 {label: "%", value: "%"},
               ]}
               onChange={(v) =>
-                setProp((props: TextProps) => (props.width.unit = v as "%"))
+                setProp((props: TextProps) => (props.$width.unit = v as "%"))
               }
             />
           </div>

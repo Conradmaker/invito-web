@@ -11,23 +11,23 @@ import {ImageSt} from "./styles.ts";
 import {TextContentEditBox} from "../Text/styles";
 
 export type ImageConfigProps = {
-  src?: string;
-  radius: number;
-  width: {value: number; unit: "px" | "%"};
-  height: {value: number; unit: "px" | "%"};
-  caption: {
+  $src?: string;
+  $radius: number;
+  $width: {value: number; unit: "px" | "%"};
+  $height: {value: number; unit: "px" | "%"};
+  $caption: {
     text: string;
     visible: boolean;
     placement: null | "bottom-right" | "bottom-center" | "bottom-left";
   };
-  fit: "fill" | "contain" | "cover" | "stretch" | "none";
-  click: {
+  $fit: "fill" | "contain" | "cover" | "stretch" | "none";
+  $click: {
     type: "none" | "link" | "modal";
     link?: string;
   };
 };
 export type ImageProps = {} & ImageConfigProps;
-function Image({src, ...rest}: ImageProps) {
+function Image({$src, ...rest}: ImageProps) {
   const {
     connectors: {connect, drag},
     actions: {setProp},
@@ -41,23 +41,23 @@ function Image({src, ...rest}: ImageProps) {
       ref={(ref: HTMLDivElement) => connect(drag(ref))}
     >
       <div className="img-positioner">
-        <img src={src} alt={rest.caption.text} />
+        <img src={$src} alt={rest.$caption.text} />
       </div>
-      {rest.caption.visible && rest.caption.text && (
+      {rest.$caption.visible && rest.$caption.text && (
         <div className="caption">
           <Typo.Desc color="secondary">
             {selected ? (
               <TextContentEditBox
-                html={rest.caption.text}
+                html={rest.$caption.text}
                 onChange={(e) =>
                   setProp(
-                    (prop: ImageConfigProps) => (prop.caption.text = e.target.value)
+                    (prop: ImageConfigProps) => (prop.$caption.text = e.target.value)
                   )
                 }
                 tagName="span"
               />
             ) : (
-              rest.caption.text
+              rest.$caption.text
             )}
           </Typo.Desc>
         </div>
@@ -75,12 +75,12 @@ function ImageCreator() {
         connectors.create(
           ref,
           <Image
-            caption={{text: "", visible: false, placement: null}}
-            click={{type: "none"}}
-            fit="cover"
-            height={{unit: "%", value: 100}}
-            width={{unit: "%", value: 100}}
-            radius={0}
+            $caption={{text: "", visible: false, placement: null}}
+            $click={{type: "none"}}
+            $fit="cover"
+            $height={{unit: "%", value: 100}}
+            $width={{unit: "%", value: 100}}
+            $radius={0}
           />
         )
       }

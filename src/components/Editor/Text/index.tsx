@@ -6,19 +6,18 @@ import useNodeState from "@/hooks/useNodeState";
 import {CreatorCardBox} from "../Toolbar/styles";
 import Typo from "@/components/System/Typo";
 import {TextContentEditBox, TextSt} from "./styles";
-import {RxMove} from "react-icons/rx";
 import LayerPositioner from "../Toolbar/Layer/LayerPositioner";
 
 export type TextProps = {
-  width: {value: number; unit: "px" | "%" | "auto"};
-  text?: string;
-  align?: "left" | "center" | "right" | "justify";
-  color?: string;
-  size: number;
-  weight: "300" | "400" | "500" | "700";
-  font: string;
+  $width: {value: number; unit: "px" | "%" | "auto"};
+  $text?: string;
+  $align?: "left" | "center" | "right" | "justify";
+  $color?: string;
+  $size: number;
+  $weight: "300" | "400" | "500" | "700";
+  $font: string;
 };
-function Text({text = "텍스트", ...rest}: TextProps) {
+function Text({$text = "텍스트", ...rest}: TextProps) {
   const {
     connectors: {connect, drag},
     actions: {setProp},
@@ -28,13 +27,13 @@ function Text({text = "텍스트", ...rest}: TextProps) {
     <TextSt {...rest} ref={(ref) => connect(drag(ref as HTMLDivElement))}>
       {selected ? (
         <TextContentEditBox
-          html={text}
-          onChange={(e) => setProp((props: TextProps) => (props.text = e.target.value))}
+          html={$text}
+          onChange={(e) => setProp((props: TextProps) => (props.$text = e.target.value))}
           tagName="p"
           translate="yes"
         />
       ) : (
-        <p dangerouslySetInnerHTML={{__html: text || ""}} />
+        <p dangerouslySetInnerHTML={{__html: $text || ""}} />
       )}
       {selected && <LayerPositioner defaultName="텍스트" editable={false} />}
     </TextSt>
@@ -48,11 +47,11 @@ function TextCreator() {
         connectors.create(
           ref as HTMLParagraphElement,
           <Text
-            weight="400"
-            width={{value: 0, unit: "auto"}}
-            size={14}
-            text="텍스트"
-            font="Wanted Sans Variable"
+            $weight="400"
+            $width={{value: 0, unit: "auto"}}
+            $size={14}
+            $text="텍스트"
+            $font="Wanted Sans Variable"
           />
         )
       }
