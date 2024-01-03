@@ -3,17 +3,19 @@ import Container from "@/components/Editor/Container";
 import Image from "@/components/Editor/Image";
 import EButton from "@/components/Editor/Button";
 import Text from "@/components/Editor/Text";
-import {Editor, Element, Frame} from "@craftjs/core";
+import {Editor} from "@craftjs/core";
 import React, {useState} from "react";
 import ToolBox from "@/components/Editor/Toolbar/ToolBox";
 import Input from "@/components/System/Input";
 import Label from "@/components/System/Input/Label";
 import Button from "@/components/System/Button";
 import ComponentSetting from "@/components/Editor/Toolbar/ComponentSetting";
+import FrameCanvas from "@/components/Editor/Frame";
+import {useEditorStore} from "@/modules/zustand/editor";
 
-export default function page() {
-  const [editable, setEditable] = useState(true);
-
+export default function Test() {
+  const {editable, border, setWidth, toggleBorder, toggleEditable, width} =
+    useEditorStore();
   return (
     <div className="h-screen flex flex-col">
       <header className="h-12 border-b items-center flex px-6 text-2xl font-bold text-blue-700">
@@ -29,25 +31,23 @@ export default function page() {
               <div className="flex gap-2 flex-1">
                 <label className="flex gap-1 items-center text-xs">
                   보기모드
-                  <Input.Switch
-                    size="xs"
-                    checked={editable}
-                    onChange={(e) => setEditable(e)}
-                  />
+                  <Input.Switch size="xs" checked={editable} onChange={toggleEditable} />
                 </label>
                 <label className="flex gap-1 items-center text-xs">
                   테두리
-                  <Input.Switch
-                    size="xs"
-                    // checked={editable}
-                    // onChange={(e) => setEditable(e.target.checked)}
-                  />
+                  <Input.Switch size="xs" checked={border} onChange={toggleBorder} />
                 </label>
               </div>
               <div className="flex gap-2 flex-1 justify-center"></div>
               <div className="flex gap-2 flex-1 justify-end">
                 <Label title="화면 너비" size="sm" direction="horizontal">
-                  <Input width={50} size="xs" />
+                  <Input
+                    width={50}
+                    size="xs"
+                    value={width}
+                    type="number"
+                    onChange={(e) => setWidth(+e.target.value)}
+                  />
                 </Label>
                 <Label title="배율" size="sm" direction="horizontal">
                   <Input.Select
@@ -63,25 +63,8 @@ export default function page() {
                 </Label>
               </div>
             </div>
-            <div className="bg-slate-100 flex-1 flex items-center justify-center">
-              <div className="w-96 h-[640px] bg-white border">
-                <Frame>
-                  <Element
-                    is={Container}
-                    $paddingBottom={8}
-                    $paddingLeft={8}
-                    $paddingRight={8}
-                    $paddingTop={8}
-                    $direction="column"
-                    $background={{type: "transparent", filter: {type: "none", blur: 0}}}
-                    $height={{value: 100, unit: "%"}}
-                    $width={{value: 100, unit: "%"}}
-                    $click={{type: "none"}}
-                    canvas
-                  ></Element>
-                </Frame>
-              </div>
-            </div>
+
+            <FrameCanvas />
 
             <div className="h-12 border-b flex items-center justify-between px-4">
               <div className="flex gap-2 flex-1"></div>
@@ -90,6 +73,7 @@ export default function page() {
                 <Button type="tertiary">임시저장</Button>
                 <Button>저장하기</Button>
               </div>
+              F
             </div>
           </div>
           <aside className="w-72 border-l">

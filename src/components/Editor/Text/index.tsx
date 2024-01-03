@@ -24,7 +24,7 @@ function Text({$text = "텍스트", ...rest}: TextProps) {
   } = useNode();
   const {hovered, selected} = useNodeState();
   return (
-    <TextSt {...rest} ref={(ref) => connect(drag(ref as HTMLDivElement))}>
+    <TextSt {...rest} ref={(ref) => connect(ref as HTMLDivElement)}>
       {selected ? (
         <TextContentEditBox
           html={$text}

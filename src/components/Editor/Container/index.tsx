@@ -7,8 +7,9 @@ import {CreatorCardBox} from "../Toolbar/styles";
 import Typo from "@/components/System/Typo";
 import {ContainerSt} from "./styles";
 import LayerPositioner from "../Toolbar/Layer/LayerPositioner";
-import {Rnd} from "react-rnd";
 import ResizeHandle from "./ResizeHandle";
+import useDragable from "@/hooks/useDragable";
+import {useEditorStore} from "@/modules/zustand/editor";
 
 export type ContainerConfigType = {
   $width: {value: number; unit: "px" | "%"};
@@ -45,34 +46,26 @@ export type ContainerProps = {
 } & ContainerConfigType;
 export default function Container({children, ...rest}: ContainerProps) {
   const {
+    id,
     connectors: {connect, drag},
     actions: {setProp},
   } = useNode();
-  const {selected, hovered} = useNodeState();
-
+  const {selected, hovered, isSelectedParent} = useNodeState();
+  const {border} = useEditorStore();
   return (
-    // <div
-    //   className="relative"
-    //   style={{
-    //     width: `${rest.width.value}${rest.width.unit}`,
-    //     height: `${rest.height.value}${rest.height.unit}`,
-    //     maxWidth: "100%",
-    //     maxHeight: "100%",
-    //   }}
-    // >
     <ContainerSt
       {...rest}
+      ref={(ref) => connect(ref as HTMLDivElement)}
       $hovered={hovered}
       $selected={selected}
-      ref={(ref) => connect(drag(ref as HTMLDivElement))}
+      $selectedRoot={isSelectedParent}
+      draggable={false}
+      $border={border}
     >
-      <div className="content">
-        {children}
-        {selected && <LayerPositioner defaultName="컨테이너" link={rest.$click.link} />}
-      </div>
+      <div className="content">{children}</div>
+      {selected && <LayerPositioner defaultName="컨테이너" link={rest.$click.link} />}
       {selected && <ResizeHandle />}
     </ContainerSt>
-    // </div>
   );
 }
 

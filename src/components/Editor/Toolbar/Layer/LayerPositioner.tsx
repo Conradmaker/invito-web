@@ -14,7 +14,10 @@ export default function LayerPositioner({
   defaultName,
   editable = true,
 }: LayerPositionerProps) {
-  const {id} = useNode();
+  const {
+    id,
+    connectors: {drag},
+  } = useNode();
   const {displayName, actions} = useEditor((state) => ({
     displayName:
       state.nodes[id] && state.nodes[id].data.custom.displayName
@@ -24,8 +27,11 @@ export default function LayerPositioner({
   }));
 
   return (
-    <div className="absolute text-xs h-6 -top-6 bg-blue-600 text-white flex items-center -left-[1px]">
-      <div className="cursor-move w-6 h-6 flex items-center justify-center">
+    <div className="absolute text-xs h-6 -top-6 bg-blue-600 text-white flex items-center left-0">
+      <div
+        ref={(ref) => drag(ref as HTMLDivElement)}
+        className="cursor-move w-6 h-6 flex items-center justify-center"
+      >
         <RxMove size={14} />
       </div>
       <div className="h-4 w-[1px] bg-slate-400" />

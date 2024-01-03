@@ -39,7 +39,7 @@ export default function BoxSetting() {
   } = useNode<ContainerProps>((node) => node.data.props as ContainerProps);
   return (
     <div className="flex flex-col gap-8 items-start p-4 h-[calc(100vh-48px)] overflow-y-scroll">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-full">
         <Typo.Body color="secondary" mb={2}>
           레이아웃
         </Typo.Body>
@@ -103,7 +103,7 @@ export default function BoxSetting() {
         <div className="flex flex-col gap-2">
           <div className="flex-1">
             <Input.Label title="높이" size="sm" direction="horizontal">
-              <div className="flex gap-1">
+              <div className="flex gap-3 items-center w-full">
                 <Input
                   className="w-full"
                   size="xs"
@@ -115,24 +115,13 @@ export default function BoxSetting() {
                     )
                   }
                 />
-                <Input.Select
-                  className="w-24"
-                  size="xs"
-                  value={$height.unit}
-                  data={[
-                    {label: "px", value: "px"},
-                    {label: "%", value: "%"},
-                  ]}
-                  onChange={(v) =>
-                    setProp((props: ContainerProps) => (props.$height.unit = v as "%"))
-                  }
-                />
               </div>
+              <span className="text-xs pl-0.5">PX</span>
             </Input.Label>
           </div>
           <div className="flex-1">
             <Input.Label title="너비" size="sm" direction="horizontal">
-              <div className="flex gap-1">
+              <div className="flex gap-3 items-center">
                 <Input
                   className="w-full"
                   size="xs"
@@ -144,18 +133,7 @@ export default function BoxSetting() {
                     )
                   }
                 />
-                <Input.Select
-                  className="w-24"
-                  size="xs"
-                  value={$width.unit}
-                  data={[
-                    {label: "px", value: "px"},
-                    {label: "%", value: "%"},
-                  ]}
-                  onChange={(v) =>
-                    setProp((props: ContainerProps) => (props.$width.unit = v as "%"))
-                  }
-                />
+                <span className="text-xs">%</span>
               </div>
             </Input.Label>
           </div>

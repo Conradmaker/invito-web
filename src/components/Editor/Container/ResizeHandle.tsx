@@ -1,68 +1,87 @@
 import {useNode} from "@craftjs/core";
-import React, {useState} from "react";
-import {ContainerConfigType} from ".";
+import React, {useCallback, useState} from "react";
+import {ContainerConfigType, ContainerProps} from ".";
+import {useEditorStore} from "@/modules/zustand/editor";
 
 export default function ResizeHandle() {
   const {
-    connectors: {connect, drag},
     actions: {setProp},
-  } = useNode();
-  const [clicked, setClicked] = useState<"x" | "y" | null>(null);
-  const [startPos, setStartPos] = useState<{x: number; y: number} | null>(null);
-  const onMouseDown = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    dir: "x" | "y"
-  ) => {
-    e.stopPropagation();
-    setClicked(dir);
-    setStartPos({x: e.clientX, y: e.clientY});
-    console.log("down", e.clientX, e.clientY);
-  };
-  const onMouseUp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  } = useNode<ContainerProps>((node) => node.data.props as ContainerProps);
+  const {width} = useEditorStore();
+  const [clicked, setClicked] = useState<"t" | "b" | "l" | "r" | null>(null);
+  const onMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>, dir: "t" | "b" | "l" | "r") => {
+      e.stopPropagation();
+      setClicked(dir);
+    },
+    []
+  );
+  const onMouseUp = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     setClicked(null);
-    setStartPos(null);
-    console.log("up", e.clientX, e.clientY);
-  };
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-    setProp((props: ContainerConfigType) => {
-      props.$width.value = props.$width.value + e.movementX;
-    });
-    console.log("startPos", startPos);
-    console.log("clientX", e.clientX);
-    console.log("movement", e.movementX);
-    console.log("pageX", e.pageX);
-    console.log("screenX", e.screenX);
-  };
+  }, []);
+  const onMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.stopPropagation();
+      setProp((props: ContainerConfigType) => {
+        if (clicked === "r" || clicked === "l") {
+          props.$width.unit = "%";
+          const percent = +((e.movementX / width) * 100).toFixed(3);
+          if (clicked === "r") {
+            if (percent > 0 && props.$width.value > 99) return (props.$width.value = 100);
+            else if (percent < 0 && props.$width.value < 1)
+              return (props.$width.value = 0);
+            props.$width.value = +(props.$width.value + percent).toFixed(3);
+          } else if (clicked === "l") {
+            if (percent < 0 && props.$width.value > 99) return (props.$width.value = 100);
+            else if (percent > 0 && props.$width.value < 1)
+              return (props.$width.value = 0);
+            props.$width.value = +(props.$width.value - percent).toFixed(3);
+          }
+        }
+        if (clicked === "b" || clicked === "t") {
+          props.$height.unit = "px";
+          if (e.movementY < 0 && props.$height.value < 1)
+            return (props.$height.value = 0);
+          clicked === "b"
+            ? (props.$height.value = props.$height.value + e.movementY)
+            : (props.$height.value = props.$height.value - e.movementY);
+        }
+      });
+    },
+    [clicked, setProp, width]
+  );
   return (
     <>
       <div
+        draggable={false}
+        className="handle top"
+        onMouseDownCapture={(e) => onMouseDown(e, "t")}
+        onMouseUp={onMouseUp}
+      ></div>
+      <div
+        draggable={false}
+        className="handle bottom"
+        onMouseDownCapture={(e) => onMouseDown(e, "b")}
+        onMouseUp={onMouseUp}
+      ></div>
+      <div
+        draggable={false}
+        className="handle left"
+        onMouseDownCapture={(e) => onMouseDown(e, "l")}
+        onMouseUp={onMouseUp}
+      ></div>
+      <div
+        draggable={false}
+        className="handle right"
+        onMouseDownCapture={(e) => onMouseDown(e, "r")}
+        onMouseUp={onMouseUp}
+      ></div>
+      <div
+        draggable={false}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
-        className={clicked ? "clicked layer" : "layer"}
-      ></div>
-      <div
-        className="handle top"
-        onMouseDown={(e) => onMouseDown(e, "y")}
-        onMouseUp={onMouseUp}
-      ></div>
-      <div
-        className="handle bottom"
-        onMouseDown={(e) => onMouseDown(e, "y")}
-        onMouseUp={onMouseUp}
-      ></div>
-      <div
-        className="handle left"
-        onMouseDown={(e) => onMouseDown(e, "x")}
-        onMouseUp={onMouseUp}
-      ></div>
-      <div
-        className="handle right"
-        onDrag={(e) => console.log("drag")}
-        onDragStart={(e) => console.log("drag s")}
-        onDragEnd={(e) => console.log("drag e")}
-        onMouseDown={(e) => onMouseDown(e, "x")}
+        className={clicked ? "clicked handle-layer" : "handle-layer"}
       ></div>
     </>
   );

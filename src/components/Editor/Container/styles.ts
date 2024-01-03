@@ -1,7 +1,12 @@
 import styled, {css} from "styled-components";
 import {ContainerConfigType} from ".";
 
-type ContainerStProps = {$selected: boolean; $hovered: boolean} & ContainerConfigType;
+type ContainerStProps = {
+  $selected: boolean;
+  $hovered: boolean;
+  $selectedRoot: boolean;
+  $border: boolean;
+} & ContainerConfigType;
 export const ContainerSt = styled.div<ContainerStProps>`
   position: relative;
   max-width: 100%;
@@ -10,23 +15,33 @@ export const ContainerSt = styled.div<ContainerStProps>`
     width: ${props.$width.value}${props.$width.unit};
     height: ${props.$height.value}${props.$height.unit};
   `};
-  .layer {
+
+  ${({$selectedRoot, $selected}) => {
+    return css`
+      z-index: ${$selectedRoot ? 999 : $selected ? 2 : 1};
+    `;
+  }}
+
+  .handle-layer {
     position: absolute;
-    top: -5%;
-    left: -5%;
-    width: 110%;
-    height: 110%;
+    top: -50vh;
+    left: -50vw;
+    bottom: -50vh;
+    right: -50vw;
     background-color: ${({theme}) => theme.colors.primary[400]};
     display: none;
-    opacity: 0.2;
+    opacity: 0.5;
     &.clicked {
+      z-index: 9999;
       display: block;
     }
   }
   .handle {
+    z-index: 99;
     display: flex;
     position: absolute;
     background-color: ${({theme}) => theme.colors.primary[400]};
+    border: 1px solid ${({theme}) => theme.colors.primary[400]};
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -36,25 +51,25 @@ export const ContainerSt = styled.div<ContainerStProps>`
       cursor: row-resize;
       left: 50%;
       transform: translateX(-50%);
-      width: 28px;
+      width: 24px;
       height: 8px;
       &::after,
       &::before {
         background-color: ${({theme}) => theme.colors.neutral[300]};
         content: "";
-        width: 50%;
+        width: 40%;
         height: 1px;
       }
     }
     &.top {
-      border-top-right-radius: 2px;
-      border-top-left-radius: 2px;
+      border-top-right-radius: 3px;
+      border-top-left-radius: 3px;
       top: -8px;
       padding-top: 1px;
     }
     &.bottom {
-      border-bottom-right-radius: 2px;
-      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
       bottom: -8px;
       padding-bottom: 1px;
     }
@@ -71,33 +86,37 @@ export const ContainerSt = styled.div<ContainerStProps>`
         background-color: ${({theme}) => theme.colors.neutral[300]};
         content: "";
         width: 1px;
-        height: 50%;
+        height: 40%;
       }
     }
     &.left {
-      border-bottom-left-radius: 2px;
-      border-top-left-radius: 2px;
+      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3px;
       left: -8px;
       padding-top: 1px;
     }
     &.right {
-      border-bottom-right-radius: 2px;
-      border-top-right-radius: 2px;
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
       right: -8px;
       padding-bottom: 1px;
     }
   }
   & > .content {
+    position: relative;
     height: 100%;
     width: 100%;
     border-width: 1px;
     border-style: ${({$selected}) => ($selected ? "solid" : "dashed")};
-    border-color: ${({$selected, $hovered, theme}) =>
+    border-color: ${({$selected, $hovered, $border, theme}) =>
       $selected
         ? theme.colors.primary[400]
         : $hovered
         ? theme.colors.primary[300]
-        : theme.colors.primary[100]};
+        : $border
+        ? theme.colors.primary[100]
+        : "transparent"};
+
     flex: 1;
     display: flex;
     align-items: flex-start;
