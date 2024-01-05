@@ -5,6 +5,7 @@ import {
   LuChevronRight,
   LuEye,
   LuEyeOff,
+  LuGalleryVertical,
   LuImage,
   LuType,
   LuUnlink2,
@@ -28,7 +29,12 @@ export default function LayerHeader() {
   const {hidden, actions, selected, type} = useEditor((state, query) => {
     const selected = query.getEvent("selected").first() === id;
     return {
-      type: state.nodes[id].data.name as "Container" | "Button" | "Text" | "Image",
+      type: state.nodes[id].data.name as
+        | "Container"
+        | "Button"
+        | "Text"
+        | "Image"
+        | "Divider",
       hidden: state.nodes[id] && state.nodes[id].data.hidden,
       selected,
       topLevel: query.node(id).isTopLevelCanvas(),
@@ -47,6 +53,7 @@ export default function LayerHeader() {
         {type === "Button" && <LuUnlink2 />}
         {type === "Container" && <LuBox />}
         {type === "Image" && <LuImage />}
+        {type === "Divider" && <LuGalleryVertical />}
       </div>
 
       <div className="inner">

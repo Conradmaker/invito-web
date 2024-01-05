@@ -8,6 +8,7 @@ import Label from "@/components/System/Input/Label";
 import Input from "@/components/System/Input";
 import LayerRoot from "./Layer/LayerRoot";
 import Image from "../Image";
+import Divider from "../Divider";
 
 export default function ToolBox() {
   const {connectors, query} = useEditor();
@@ -20,11 +21,8 @@ export default function ToolBox() {
           title: "설정",
           content: (
             <div className="flex flex-col px-6 pt-2 pb-6 gap-2">
-              <Label size="sm" title="컨텐츠 너비">
+              <Label size="sm" title="프로젝트명">
                 <Input size="sm" />
-              </Label>
-              <Label size="sm" title="테마">
-                <Input.Color size="sm" />
               </Label>
             </div>
           ),
@@ -33,10 +31,11 @@ export default function ToolBox() {
           title: "구성요소",
           content: (
             <div className="grid grid-cols-3 px-6 py-2 pb-4 gap-2">
-              <Button.Creator />
-              <Text.Creator />
               <Box.Creator />
+              <Text.Creator />
+              <Button.Creator />
               <Image.Creator />
+              <Divider.Creator />
             </div>
           ),
         },

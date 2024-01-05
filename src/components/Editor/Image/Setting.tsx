@@ -196,7 +196,6 @@ export default function ImageSettings() {
               />
             </Input.Label>
           </div>
-          diD
         </div>
 
         <div className="w-full flex flex-col gap-2 mb-6 mt-2">

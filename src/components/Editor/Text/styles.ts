@@ -27,7 +27,7 @@ export const TextSt = styled.span<TextProps>`
 `;
 
 export const TextContentEditBox = styled(ContentEditable)`
-  box-shadow: 0 0px 2px ${({theme}) => theme.colors.primary[400]} inset;
+  box-shadow: 0 0px 0px 0.7px ${({theme}) => theme.colors.primary[400]} inset;
   cursor: text;
   width: 100%;
   height: 100%;

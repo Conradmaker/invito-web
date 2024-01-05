@@ -116,7 +116,9 @@ export default function BoxSetting() {
                   }
                 />
               </div>
-              <span className="text-xs pl-0.5">PX</span>
+              <Typo.Desc color="secondary" className="pl-1">
+                px
+              </Typo.Desc>
             </Input.Label>
           </div>
           <div className="flex-1">
@@ -133,7 +135,7 @@ export default function BoxSetting() {
                     )
                   }
                 />
-                <span className="text-xs">%</span>
+                <Typo.Desc color="secondary">%</Typo.Desc>
               </div>
             </Input.Label>
           </div>

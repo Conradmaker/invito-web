@@ -5,6 +5,9 @@ interface EditorState {
   width: number;
   setWidth: (width: number) => void;
 
+  scale: number;
+  setScale: (scale: number) => void;
+
   editable: boolean;
   toggleEditable: (v?: boolean) => void;
 
@@ -18,6 +21,12 @@ export const useEditorStore = create(
     setWidth: (payload) =>
       set((state) => {
         state.width = payload;
+      }),
+
+    scale: 100,
+    setScale: (payload) =>
+      set((state) => {
+        state.scale = payload;
       }),
 
     editable: true,
