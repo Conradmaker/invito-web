@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import {ButtonBox, IconButtonBox} from "./styles";
 import Loading from "../Icon/Loading";
@@ -9,7 +8,7 @@ export type ButtonProps = {
   children: React.ReactNode;
   loading?: boolean;
   type?: "primary" | "secondary" | "tertiary" | "ghost";
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   block?: boolean;
   disabled?: boolean;
   leftIcon?: React.ReactNode;

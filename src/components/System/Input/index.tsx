@@ -75,9 +75,13 @@ function Input({
         />
       </InputBox>
       {error ? (
-        <Typo.Body color="danger">&nbsp;{error}</Typo.Body>
+        <Typo.Desc className="-translate-y-1" color="danger">
+          &nbsp;{error}
+        </Typo.Desc>
       ) : info ? (
-        <Typo.Body color="secondary">&nbsp;{info}</Typo.Body>
+        <Typo.Desc className="-translate-y-1" color="secondary">
+          &nbsp;{info}
+        </Typo.Desc>
       ) : null}
     </div>
   );

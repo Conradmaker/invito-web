@@ -110,6 +110,7 @@ export const ButtonBox = styled.button<StyledBtnProps>`
         return css`
           padding: 8px 16px;
           font-size: 14px;
+          font-weight: 500;
           svg {
             width: 14px;
             height: 14px;
@@ -119,6 +120,17 @@ export const ButtonBox = styled.button<StyledBtnProps>`
         return css`
           padding: 10px 16px;
           font-size: 16px;
+          font-weight: 600;
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        `;
+      case "xl":
+        return css`
+          padding: 14px 24px;
+          font-size: 16px;
+          font-weight: 600;
           svg {
             width: 16px;
             height: 16px;

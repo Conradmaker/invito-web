@@ -42,6 +42,10 @@ const TypoSt = styled.span<TypoStyle>`
   `}
   margin-top: ${({$mt}) => $mt}px;
   margin-bottom: ${({$mb}) => $mb}px;
+  a {
+    color: ${({theme}) => theme.colors.primary[400]};
+    /* text-decoration: underline; */
+  }
 `;
 export const HeadingTypo = styled(TypoSt)<{$level: HeadingProps["level"]}>`
   font-weight: 600;
