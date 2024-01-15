@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import type {Metadata} from "next";
-// import {Inter,Gothic_A1} from "next/font/google";
 import "./globals.css";
 import StyledProvider from "@/libs/registry/styledComponentsRegistry";
+import DeviceInfoProvider from "@/libs/registry/DeviceInfoRegistry";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,7 +32,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         />
       </head>
       <body>
-        <StyledProvider>{children}</StyledProvider>
+        <DeviceInfoProvider>
+          <StyledProvider>{children}</StyledProvider>
+        </DeviceInfoProvider>
       </body>
     </html>
   );

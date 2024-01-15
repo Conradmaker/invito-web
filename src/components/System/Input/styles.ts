@@ -16,6 +16,7 @@ type InputBoxProps = InputProps & {
   $width?: number;
   $bordered: boolean;
   $textAlign?: string;
+  $block?: boolean;
 };
 export const InputBox = styled.div<InputBoxProps>`
   transition: all 0.1s ease-in-out;
@@ -34,8 +35,8 @@ export const InputBox = styled.div<InputBoxProps>`
     css`
       width: ${$width}px;
     `}
-  ${({block}) =>
-    block &&
+  ${({$block}) =>
+    $block &&
     css`
       flex: 1;
       width: 100%;

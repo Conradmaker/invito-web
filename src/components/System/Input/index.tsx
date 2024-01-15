@@ -58,7 +58,7 @@ function Input({
         $error={!!error}
         $bordered={bordered}
         $textAlign={textAlign}
-        block={block}
+        $block={block}
       >
         {prefix ? <div className="prefix">{prefix}</div> : null}
         <input
