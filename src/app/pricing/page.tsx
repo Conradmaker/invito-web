@@ -17,8 +17,8 @@ export default function page() {
         </p>
 
         <div className="flex mt-28">
-          <img src="/img/plan.png" alt="" className="h-80 blur-sm rounded-3xl" />
-          <img src="/img/free.png" alt="" className="w-96 scale-125 -translate-y-8" />
+          <img src="/img/plan.png" alt="" className="h-72 blur-sm rounded-3xl" />
+          <img src="/img/free.png" alt="" className="w-80 scale-125 -translate-y-8" />
         </div>
       </div>
       <Footer />
