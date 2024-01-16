@@ -15,14 +15,15 @@ export default function FrameCanvas() {
   };
   useEffect(() => {}, []);
   return (
-    <div className="bg-slate-100 flex-1 flex items-center justify-center overflow-auto relative p-12">
+    <div className="bg-slate-100 flex-1 flex items-center justify-center overflow-auto relative">
       <div
         className={`h-[640px] bg-white border`}
         style={{width, scale: scale / 100}}
         onClick={onChange}
       >
-        <Frame>
+        <Frame key={1}>
           <Element
+            id={1 + ""}
             is={Container}
             $paddingBottom={8}
             $paddingLeft={8}

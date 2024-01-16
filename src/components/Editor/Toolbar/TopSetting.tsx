@@ -5,6 +5,7 @@ import {useEditorStore} from "@/modules/zustand/editor";
 import {useEditor} from "@craftjs/core";
 import React from "react";
 import {LuArrowLeft, LuArrowRight} from "react-icons/lu";
+import {TopSettingSt} from "./styles";
 
 export default function TopSetting() {
   const {canUndo, canRedo, actions} = useEditor((_, query) => ({
@@ -13,8 +14,8 @@ export default function TopSetting() {
   }));
   const {setWidth, width, setScale, scale} = useEditorStore();
   return (
-    <div className="h-12 border-b flex items-center justify-between px-4">
-      <div className="flex gap-2 flex-1">
+    <TopSettingSt>
+      <div className="history">
         <Button.Icon
           size="xs"
           type="tertiary"
@@ -32,7 +33,7 @@ export default function TopSetting() {
           <LuArrowRight />
         </Button.Icon>
       </div>
-      <div className="flex gap-8 justify-end">
+      <div className="right">
         <Label title="화면 너비" size="sm" direction="horizontal">
           <Input
             width={50}
@@ -57,6 +58,6 @@ export default function TopSetting() {
           />
         </Label>
       </div>
-    </div>
+    </TopSettingSt>
   );
 }

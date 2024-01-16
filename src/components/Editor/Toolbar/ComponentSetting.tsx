@@ -1,5 +1,6 @@
 import {useEditor} from "@craftjs/core";
 import React from "react";
+import {ComponentSettingSt} from "./styles";
 
 export default function ComponentSetting() {
   const {selected} = useEditor((state) => {
@@ -19,5 +20,9 @@ export default function ComponentSetting() {
       selected,
     };
   });
-  return <div>{selected?.settings && React.createElement(selected.settings)}</div>;
+  return (
+    <ComponentSettingSt>
+      {selected?.settings && React.createElement(selected.settings)}
+    </ComponentSettingSt>
+  );
 }
