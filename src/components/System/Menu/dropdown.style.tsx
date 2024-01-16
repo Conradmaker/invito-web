@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 export const DropdownContentContainer = styled.div`
   .DropdownMenuContent,
@@ -11,7 +10,7 @@ export const DropdownContentContainer = styled.div`
     background-color: ${({theme}) => theme.colors.neutral[0]};
     border-radius: 6px;
     padding: 5px;
-    box-shadow: 0px 10px 28px -10px rgba(22, 23, 24, 0.35),
+    box-shadow: 0px 6px 28px -6px rgba(22, 23, 24, 0.35),
       0px 10px 10px -15px rgba(22, 23, 24, 0.2);
     animation-duration: 400ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -66,8 +65,10 @@ export const DropdownContentContainer = styled.div`
 
   .DropdownMenuSeparator {
     height: 1px;
+    width: 90%;
+    margin: 4px auto;
     background-color: ${({theme}) => theme.colors.neutral[200]};
-    margin: 8px;
+    padding: 0px 4px;
   }
 
   .DropdownMenuItemIndicator {

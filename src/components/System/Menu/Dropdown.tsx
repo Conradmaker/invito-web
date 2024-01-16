@@ -1,12 +1,23 @@
 import React from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import {RxCaretRight, RxCheck, RxDotFilled, RxHamburgerMenu} from "react-icons/rx";
+import {RxCaretRight, RxDotFilled} from "react-icons/rx";
 import {DropdownContentContainer} from "./dropdown.style";
 
+type DropdownMenuItem = {
+  type?: "item" | "checkbox" | "radio" | "label" | "separator";
+  label?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  children?: DropdownMenuItem[];
+  value?: string;
+  options?: {label: string; value: string}[];
+  onChange?: (v: string) => void;
+};
 type DropdownProps = {
   children: React.ReactNode;
+  data: DropdownMenuItem[];
 };
-export default function Dropdown({children}: DropdownProps) {
+export default function Dropdown({children, data}: DropdownProps) {
   return (
     <div className="flex">
       <DropdownMenu.Root>
@@ -16,47 +27,93 @@ export default function Dropdown({children}: DropdownProps) {
 
         <DropdownMenu.Portal>
           <DropdownContentContainer>
-            <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5}>
-              <DropdownMenu.Item className="DropdownMenuItem">아이템1</DropdownMenu.Item>
-              <DropdownMenu.Item className="DropdownMenuItem">아이템2</DropdownMenu.Item>
-              <DropdownMenu.Item className="DropdownMenuItem" disabled>
-                Disabled Item
-              </DropdownMenu.Item>
-              <DropdownMenu.Sub>
-                <DropdownMenu.SubTrigger className="DropdownMenuSubTrigger">
-                  더보기
-                  <div className="RightSlot">
-                    <RxCaretRight />
-                  </div>
-                </DropdownMenu.SubTrigger>
-                <DropdownMenu.Portal>
-                  <DropdownContentContainer>
-                    <DropdownMenu.SubContent
-                      className="DropdownMenuSubContent"
-                      sideOffset={4}
-                      alignOffset={-4}
+            <DropdownMenu.Content className="DropdownMenuContent" sideOffset={12}>
+              {data?.map((item, idx) => {
+                if (item.type === "separator")
+                  return (
+                    <DropdownMenu.Separator key={idx} className="DropdownMenuSeparator" />
+                  );
+                else if (item.children)
+                  return (
+                    <DropdownMenu.Sub key={idx}>
+                      <DropdownMenu.SubTrigger className="DropdownMenuSubTrigger">
+                        {item.label}
+                        <div className="RightSlot">
+                          <RxCaretRight />
+                        </div>
+                      </DropdownMenu.SubTrigger>
+                      <DropdownMenu.Portal>
+                        <DropdownContentContainer>
+                          <DropdownMenu.SubContent
+                            className="DropdownMenuSubContent"
+                            sideOffset={4}
+                            alignOffset={-4}
+                          >
+                            {item.children?.map((subItem, subIdx) => {
+                              if (subItem.type === "separator")
+                                return (
+                                  <DropdownMenu.Separator
+                                    key={"s-" + subIdx}
+                                    className="DropdownMenuSeparator"
+                                  />
+                                );
+                              else
+                                return (
+                                  <DropdownMenu.Item
+                                    key={"s-" + subIdx}
+                                    className="DropdownMenuItem"
+                                    disabled={subItem.disabled}
+                                  >
+                                    {subItem.label}
+                                  </DropdownMenu.Item>
+                                );
+                            })}
+                          </DropdownMenu.SubContent>
+                        </DropdownContentContainer>
+                      </DropdownMenu.Portal>
+                    </DropdownMenu.Sub>
+                  );
+                else if (item.options)
+                  return (
+                    <React.Fragment key={idx}>
+                      <DropdownMenu.Label className="DropdownMenuLabel">
+                        {item.label}
+                      </DropdownMenu.Label>
+                      <DropdownMenu.RadioGroup
+                        value={item.value}
+                        onValueChange={item.onChange}
+                      >
+                        {item.options.map((option) => {
+                          return (
+                            <DropdownMenu.RadioItem
+                              key={idx + option.value}
+                              className="DropdownMenuRadioItem"
+                              value={option.value}
+                            >
+                              <DropdownMenu.ItemIndicator className="DropdownMenuItemIndicator">
+                                <RxDotFilled />
+                              </DropdownMenu.ItemIndicator>
+                              {option.label}
+                            </DropdownMenu.RadioItem>
+                          );
+                        })}
+                      </DropdownMenu.RadioGroup>
+                    </React.Fragment>
+                  );
+                else
+                  return (
+                    <DropdownMenu.Item
+                      onClick={item.onClick}
+                      key={idx}
+                      className="DropdownMenuItem"
+                      disabled={item.disabled}
                     >
-                      <DropdownMenu.Item className="DropdownMenuItem">
-                        서브메뉴1
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item className="DropdownMenuItem">
-                        서브메뉴2
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item className="DropdownMenuItem">
-                        서브메뉴3
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Separator className="DropdownMenuSeparator" />
-                      <DropdownMenu.Item className="DropdownMenuItem">
-                        서브메뉴2-1
-                      </DropdownMenu.Item>
-                    </DropdownMenu.SubContent>
-                  </DropdownContentContainer>
-                </DropdownMenu.Portal>
-              </DropdownMenu.Sub>
+                      {item.label}
+                    </DropdownMenu.Item>
+                  );
+              })}
 
-              <DropdownMenu.Separator className="DropdownMenuSeparator" />
-
-              <DropdownMenu.CheckboxItem
+              {/* <DropdownMenu.CheckboxItem
                 className="DropdownMenuCheckboxItem"
                 checked={true}
                 onCheckedChange={() => alert("checked")}
@@ -75,11 +132,9 @@ export default function Dropdown({children}: DropdownProps) {
                   <RxCheck />
                 </DropdownMenu.ItemIndicator>
                 체크박스2
-              </DropdownMenu.CheckboxItem>
+              </DropdownMenu.CheckboxItem> */}
 
-              <DropdownMenu.Separator className="DropdownMenuSeparator" />
-
-              <DropdownMenu.Label className="DropdownMenuLabel">
+              {/* <DropdownMenu.Label className="DropdownMenuLabel">
                 라디오그룹
               </DropdownMenu.Label>
               <DropdownMenu.RadioGroup value={"pedro"} onValueChange={(v) => alert(v)}>
@@ -95,7 +150,7 @@ export default function Dropdown({children}: DropdownProps) {
                   </DropdownMenu.ItemIndicator>
                   라디오2
                 </DropdownMenu.RadioItem>
-              </DropdownMenu.RadioGroup>
+              </DropdownMenu.RadioGroup> */}
 
               <DropdownMenu.Arrow className="DropdownMenuArrow" />
             </DropdownMenu.Content>

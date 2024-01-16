@@ -1,7 +1,6 @@
 import React from "react";
 import * as Menubar from "@radix-ui/react-menubar";
 import {MenuContainer, SubmenuContent} from "./styles";
-import {RxCaretRight} from "react-icons/rx";
 import Navbar from "./Navbar";
 import Dropdown from "./Dropdown";
 

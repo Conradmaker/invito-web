@@ -21,6 +21,7 @@ export type SelectProps = {
         children?: {label: string; value: string}[];
       }[];
   className?: string;
+  ghost?: boolean;
 };
 export default function Select({
   size = "sm",
@@ -34,6 +35,7 @@ export default function Select({
   onChange,
   block = false,
   className,
+  ghost = false,
 }: SelectProps) {
   const [focused, setFocused] = useState(false);
   return (
@@ -43,7 +45,8 @@ export default function Select({
         $block={block}
         $focused={focused}
         $error={false}
-        size={size}
+        $ghost={ghost}
+        $size={size}
       >
         <RSelect.Root
           onOpenChange={(open) => setFocused(open)}

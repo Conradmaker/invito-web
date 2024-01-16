@@ -368,7 +368,8 @@ type RSelectProps = {
   $focused: boolean;
   $error: boolean;
   $block: boolean;
-  size: "xs" | "sm" | "md" | "lg";
+  $size: "xs" | "sm" | "md" | "lg";
+  $ghost: boolean;
 };
 export const RSelectSt = styled.div<RSelectProps>`
   display: flex;
@@ -393,6 +394,7 @@ export const RSelectSt = styled.div<RSelectProps>`
       transition: all 0.2s ease-in-out;
       color: ${({theme}) => theme.colors.neutral[600]};
     }
+
     &:hover {
       background-color: ${({theme}) => theme.colors.neutral[100]};
     }
@@ -430,8 +432,8 @@ export const RSelectSt = styled.div<RSelectProps>`
         flex: 1;
       `}
 
-    ${({size}) => {
-      switch (size) {
+    ${({$size}) => {
+      switch ($size) {
         case "xs":
           return css`
             padding: 3.5px 10px;
@@ -494,7 +496,15 @@ export const RSelectSt = styled.div<RSelectProps>`
             }
           `;
       }
-    }}
+    }} 
+    ${({$ghost}) =>
+      $ghost &&
+      css`
+        box-shadow: none;
+        .select-icon {
+          display: none;
+        }
+      `}
   }
 `;
 

@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 import "./globals.css";
 import StyledProvider from "@/libs/registry/styledComponentsRegistry";
 import DeviceInfoProvider from "@/libs/registry/DeviceInfoRegistry";
+import ToastRegistry from "@/libs/registry/ToastRegistry";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,7 +34,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       </head>
       <body>
         <DeviceInfoProvider>
-          <StyledProvider>{children}</StyledProvider>
+          <StyledProvider>
+            <ToastRegistry>{children}</ToastRegistry>
+          </StyledProvider>
         </DeviceInfoProvider>
       </body>
     </html>
