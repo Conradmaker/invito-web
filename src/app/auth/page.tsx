@@ -4,17 +4,11 @@ import Input from "@/components/System/Input";
 import Typo from "@/components/System/Typo";
 import useLogin from "@/hooks/Form/useLogin";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
 import React from "react";
 import {FaGoogle} from "react-icons/fa";
 export default function Page() {
   const loginForm = useLogin();
-  const {replace} = useRouter();
-  const login = async () => {
-    await loginForm.onLogin().then(() => {
-      replace("/dashboard");
-    });
-  };
+
   return (
     <>
       <Typo.Heading level={2}>로그인</Typo.Heading>
@@ -41,7 +35,7 @@ export default function Page() {
       </Link>
       <div className="h-8" />
 
-      <Button size="md" loading={loginForm.loading} onClick={login}>
+      <Button size="md" loading={loginForm.loading} onClick={loginForm.onLogin}>
         로그인
       </Button>
       <div className="h-[1px] w-full bg-slate-200 my-5 flex items-center justify-center relative">

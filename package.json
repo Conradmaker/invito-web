@@ -31,6 +31,7 @@
     "immer": "^10.0.3",
     "next": "14.0.4",
     "polished": "^4.2.2",
+    "rc-table": "^7.37.0",
     "react": "^18",
     "react-color": "^2.19.3",
     "react-color-palette": "^7.1.0",

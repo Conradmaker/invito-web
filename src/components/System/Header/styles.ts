@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 export const HeaderSt = styled.header`
   width: 100%;
   max-width: 1240px;
@@ -31,10 +31,11 @@ export const HeaderSt = styled.header`
     }
   }
 `;
-export const DashboardHeaderSt = styled.header`
+export const DashboardHeaderSt = styled.header<{$pathname: string}>`
   height: 64px;
   display: flex;
-  padding: 0 24px;
+  padding: 0px 64px;
+  margin: 12px 0px;
   align-items: center;
   justify-content: space-between;
   .left {
@@ -48,8 +49,38 @@ export const DashboardHeaderSt = styled.header`
   .avatar {
     cursor: pointer;
   }
+  transition: all 0.2s ease-in-out;
+  ${({$pathname}) => {
+    if ($pathname.startsWith("/project")) {
+      return css`
+        animation: sizeDown 0.4s 0.3s ease-in-out forwards;
+      `;
+    }
+  }}
+  @keyframes sizeDown {
+    0% {
+      padding: 0px 64px;
+      margin: 12px 0px;
+    }
+    100% {
+      padding: 0 24px;
+      margin: 0px 0px;
+      height: 47px;
+    }
+  }
 `;
 export const BreadcrumbSt = styled.div`
   display: flex;
   align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: ${({theme}) => theme.colors.neutral[900]};
+  & > p {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    &:hover {
+      color: ${({theme}) => theme.colors.neutral[600]};
+    }
+  }
 `;

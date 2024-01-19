@@ -1,13 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import Button from "@/components/System/Button";
+import useAuth from "@/hooks/Form/useAuth";
+import {useUserStore} from "@/modules/zustand/user";
 import {useRouter} from "next/navigation";
-import React from "react";
+import React, {useEffect} from "react";
 import {LuArrowLeft} from "react-icons/lu";
 
 export default function Layout({children}: {children: React.ReactNode}) {
-  const {back} = useRouter();
-
+  const {back, replace} = useRouter();
+  const {tokenLogin} = useAuth();
+  const {user, accessToken} = useUserStore();
+  useEffect(() => {
+    if (!user) tokenLogin();
+    else replace("/dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   return (
     <div className="flex w-full h-screen overflow-hidden">
       <div className="flex-[1.5] h-full flex items-center justify-center relative">

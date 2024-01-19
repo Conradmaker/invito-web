@@ -5,9 +5,12 @@ import {persist, createJSONStorage} from "zustand/middleware";
 export type User = {
   nickname: string;
   email: string;
-  password: string;
+  avatar: string;
+  trackingId: string;
+  lastLogin: Date;
   createdAt: string;
-  updatedAt: string;
+  devices: {id: number; os: string; browser: string; lastLogin: Date}[];
+  teams: {id: number; slug: string; name: string; avatar: string}[];
 };
 export type Device = {
   fingerPrint: string;
