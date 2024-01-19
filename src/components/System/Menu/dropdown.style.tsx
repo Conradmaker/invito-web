@@ -10,8 +10,7 @@ export const DropdownContentContainer = styled.div`
     background-color: ${({theme}) => theme.colors.neutral[0]};
     border-radius: 6px;
     padding: 5px;
-    box-shadow: 0px 6px 28px -6px rgba(22, 23, 24, 0.35),
-      0px 10px 10px -15px rgba(22, 23, 24, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 4px -1px;
     animation-duration: 400ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
@@ -37,7 +36,7 @@ export const DropdownContentContainer = styled.div`
     border-radius: 4px;
     display: flex;
     align-items: center;
-    padding: 4px 5px;
+    padding: 6px 5px;
     position: relative;
     padding-left: 24px;
     user-select: none;
@@ -47,13 +46,16 @@ export const DropdownContentContainer = styled.div`
       pointer-events: none;
     }
     &[data-highlighted] {
-      background-color: ${({theme}) => theme.colors.primary[100]};
-      color: ${({theme}) => theme.colors.primary[400]};
+      background-color: ${({theme}) => theme.colors.primary[300]};
+      color: ${({theme}) => theme.colors.primary[100]};
+      .DropdownMenuItemIndicator {
+        color: ${({theme}) => theme.colors.primary[100]};
+      }
     }
   }
   .DropdownMenuSubTrigger[data-state="open"] {
     background-color: ${({theme}) => theme.colors.primary[100]};
-    color: ${({theme}) => theme.colors.primary[400]};
+    color: ${({theme}) => theme.colors.primary[500]};
   }
 
   .DropdownMenuLabel {
@@ -78,7 +80,7 @@ export const DropdownContentContainer = styled.div`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: ${({theme}) => theme.colors.primary[300]};
+    color: ${({theme}) => theme.colors.primary[500]};
     font-size: 16px;
   }
 

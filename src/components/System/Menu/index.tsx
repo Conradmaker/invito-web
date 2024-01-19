@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import * as Menubar from "@radix-ui/react-menubar";
 import {MenuContainer, SubmenuContent} from "./styles";
 import Navbar from "./Navbar";
 import Dropdown from "./Dropdown";
+import SideTab from "./SideTab";
 
 function Menu() {
   return (

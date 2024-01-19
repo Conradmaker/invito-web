@@ -432,3 +432,32 @@ export const NavMenuContainer = styled(NavigationMenu.Root)`
     }
   }
 `;
+
+export const SideTabSt = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 200px;
+  li {
+    cursor: pointer;
+    padding: 8px;
+    color: ${({theme}) => theme.colors.neutral[600]};
+    border-radius: 6px;
+    font-size: 15px;
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    &.active {
+      color: ${({theme}) => theme.colors.neutral[900]};
+      font-weight: 600;
+    }
+    &:hover:not(.active) {
+      color: ${({theme}) => theme.colors.neutral[900]};
+    }
+    &:hover {
+      background-color: ${({theme}) => theme.colors.neutral[100]};
+    }
+  }
+`;

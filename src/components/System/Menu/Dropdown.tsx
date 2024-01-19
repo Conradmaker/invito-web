@@ -27,7 +27,7 @@ export default function Dropdown({children, data}: DropdownProps) {
 
         <DropdownMenu.Portal>
           <DropdownContentContainer>
-            <DropdownMenu.Content className="DropdownMenuContent" sideOffset={12}>
+            <DropdownMenu.Content className="DropdownMenuContent" sideOffset={4}>
               {data?.map((item, idx) => {
                 if (item.type === "separator")
                   return (
